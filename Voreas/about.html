@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | VOREAS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="logo.png" alt="Logo" class="logo-img">
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="menu.html" data-i18n="nav_menu">Menu</a></li>
+        <li><a href="about.html" data-i18n="nav_about">About</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <div class="lang-switcher">
+        <button onclick="setLanguage('en')" id="lang-en">EN</button>
+        <button onclick="setLanguage('gr')" id="lang-gr">GR</button>
+      </div>
+    </nav>
+  </header>
+
+  <img src="logoAvli.jpg" alt="Voreas Logo Avli" class="about-banner">
+
+  <section class="about-content">
+    <div class="about-container">
+      <div class="about-text">
+        <h2 data-i18n="about_story_title">Our Story</h2>
+        <p data-i18n="about_text_en">VOREAS is a family-run mezedopoleio and mageireio in Athens, serving authentic Greek home-cooked dishes with respect for tradition and fresh, local ingredients. Every plate is a taste of Greek heritage and hospitality.</p>
+        <p data-i18n="about_text_gr">Το VOREAS είναι ένα οικογενειακό μεζεδοπωλείο και μαγειρείο στην Αθήνα, που προσφέρει αυθεντικά μαγειρευτά ελληνικά πιάτα με σεβασμό στην παράδοση και φρέσκα, τοπικά υλικά. Κάθε πιάτο είναι μια γεύση από την ελληνική φιλοξενία και παράδοση.</p>
+      </div>
+      
+      <div class="about-features">
+        <div class="feature">
+          <i class="fas fa-heart"></i>
+          <h3 data-i18n="feature_family">Family Tradition</h3>
+          <p data-i18n="feature_family_desc">Passed down through generations</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-leaf"></i>
+          <h3 data-i18n="feature_fresh">Fresh Ingredients</h3>
+          <p data-i18n="feature_fresh_desc">Local and seasonal produce</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-home"></i>
+          <h3 data-i18n="feature_home">Home Cooking</h3>
+          <p data-i18n="feature_home_desc">Authentic Greek recipes</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  const translations = {
+    en: {
+      nav_home: 'Home',
+      nav_menu: 'Menu',
+      nav_about: 'About',
+      nav_contact: 'Contact',
+      about_title: 'About Us',
+      about_subtitle: 'Discover the story behind Voreas',
+      about_story_title: 'Our Story',
+      about_text_en: 'VOREAS is a family-run mezedopoleio and mageireio in Athens, serving authentic Greek home-cooked dishes with respect for tradition and fresh, local ingredients. Every plate is a taste of Greek heritage and hospitality.',
+      about_text_gr: 'Το VOREAS είναι ένα οικογενειακό μεζεδοπωλείο και μαγειρείο στην Αθήνα, που προσφέρει αυθεντικά μαγειρευτά ελληνικά πιάτα με σεβασμό στην παράδοση και φρέσκα, τοπικά υλικά. Κάθε πιάτο είναι μια γεύση από την ελληνική φιλοξενία και παράδοση.',
+      feature_family: 'Family Tradition',
+      feature_family_desc: 'Passed down through generations',
+      feature_fresh: 'Fresh Ingredients',
+      feature_fresh_desc: 'Local and seasonal produce',
+      feature_home: 'Home Cooking',
+      feature_home_desc: 'Authentic Greek recipes'
+    },
+    gr: {
+      nav_home: 'Αρχική',
+      nav_menu: 'Μενού',
+      nav_about: 'Σχετικά',
+      nav_contact: 'Επικοινωνία',
+      about_title: 'Σχετικά με εμάς',
+      about_subtitle: 'Ανακαλύψτε την ιστορία του Voreas',
+      about_story_title: 'Η Ιστορία μας',
+      about_text_en: 'VOREAS is a family-run mezedopoleio and mageireio in Athens, serving authentic Greek home-cooked dishes with respect for tradition and fresh, local ingredients. Every plate is a taste of Greek heritage and hospitality.',
+      about_text_gr: 'Το VOREAS είναι ένα οικογενειακό μεζεδοπωλείο και μαγειρείο στην Αθήνα, που προσφέρει αυθεντικά μαγειρευτά ελληνικά πιάτα με σεβασμό στην παράδοση και φρέσκα, τοπικά υλικά. Κάθε πιάτο είναι μια γεύση από την ελληνική φιλοξενία και παράδοση.',
+      feature_family: 'Οικογενειακή Παράδοση',
+      feature_family_desc: 'Περασμένη από γενιά σε γενιά',
+      feature_fresh: 'Φρέσκα Υλικά',
+      feature_fresh_desc: 'Τοπικά και εποχικά προϊόντα',
+      feature_home: 'Σπιτικό Μαγείρεμα',
+      feature_home_desc: 'Αυθεντικές ελληνικές συνταγές'
+    }
+  };
+
+  function setLanguage(lang) {
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    document.getElementById('lang-gr').classList.toggle('active', lang === 'gr');
+  }
+
+  // Set default language
+  setLanguage('en');
+  </script>
+</body>
+</html> 

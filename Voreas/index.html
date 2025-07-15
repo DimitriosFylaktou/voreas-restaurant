@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Restaurant Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="logo.png" alt="Logo" class="logo-img">
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home" data-i18n="nav_home">Home</a></li>
+        <li><a href="menu.html" data-i18n="nav_menu">Menu</a></li>
+        <li><a href="about.html" data-i18n="nav_about">About</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <div class="lang-switcher">
+        <button onclick="setLanguage('en')" id="lang-en">EN</button>
+        <button onclick="setLanguage('gr')" id="lang-gr">GR</button>
+      </div>
+    </nav>
+  </header>
+  <section id="home" class="hero">
+    <img src="Voreasabout-photo.jpg" alt="Voreas Banner" class="about-banner">
+    <h1 class="site-title">Μεζεδοπωλείο • Μαγειρείο</h1>
+  </section>
+  <section class="image-row">
+    <div class="image-col left">
+      <img src="placeholder-left.jpg" alt="Left Image" class="side-img">
+    </div>
+    <div class="image-col right">
+      <img src="voreas-story.jpg" alt="Voreas Story" class="side-img">
+    </div>
+  </section>
+  <div class="site-quote">Σε κάθε πιάτο, μια ιστορία — σε κάθε μπουκιά, μια ανάμνηση</div>
+  
+  <section class="features-section">
+    <div class="features-container">
+      <div class="feature-circle">
+        <h3 data-i18n="feature_authentic">Authentic Recipes</h3>
+        <p data-i18n="feature_authentic_desc">Passed down through generations</p>
+      </div>
+      <div class="feature-circle">
+        <h3 data-i18n="feature_fresh">Fresh Ingredients</h3>
+        <p data-i18n="feature_fresh_desc">Locally sourced, always fresh</p>
+      </div>
+      <div class="feature-circle">
+        <h3 data-i18n="feature_hospitality">Warm Hospitality</h3>
+        <p data-i18n="feature_hospitality_desc">Feel like part of the family</p>
+      </div>
+      <div class="feature-circle">
+        <h3 data-i18n="feature_tradition">Greek Tradition</h3>
+        <p data-i18n="feature_tradition_desc">Centuries of culinary heritage</p>
+      </div>
+      <div class="feature-circle">
+        <h3 data-i18n="feature_quality">Premium Quality</h3>
+        <p data-i18n="feature_quality_desc">Excellence in every detail</p>
+      </div>
+    </div>
+  </section>
+  
+  <section class="story-section">
+    <div class="story-container">
+      <div class="story-text">
+        <h2 data-i18n="our_story_title">Our Story</h2>
+        <p data-i18n="our_story_p1">VOREAS is a mezedopoleio and mageireio in Athens, serving authentic Greek home-cooked dishes with respect for tradition and fresh, local ingredients. Every plate is a taste of Greek heritage and hospitality.</p>
+        <p data-i18n="our_story_p2">Whether you're a local or a traveler, VOREAS welcomes you with flavors that feel like home.</p>
+      </div>
+      <div class="story-image">
+        <img src="lamb-light.jpg" alt="Lamb Light at Voreas" class="story-img">
+      </div>
+    </div>
+  </section>
+  
+  <!-- All other content removed for a blank home page -->
+  <section id="contact-reviews-social" class="contact-reviews-social-section">
+    <div class="contact-reviews-social-container">
+      <div class="contact-side">
+        <h2>Contact</h2>
+        <div class="contact-info">
+          <div><a href="https://maps.google.com/?q=Αλεξάνδρου Πάντου 18, Καλλιθέα, 17671" target="_blank" rel="noopener" class="contact-link">Αλεξάνδρου Πάντου 18, Καλλιθέα, 17671</a></div>
+          <div style="margin-top:0.5em;"><span style="font-size:1.2em;">📞</span> <a href="tel:2109217500" class="contact-link">210 9217500</a></div>
+          <div style="margin-top:0.5em;"><span style="font-size:1.2em;">✉️</span> <a href="mailto:Voreaseatery@gmail.com" class="contact-link">Voreaseatery@gmail.com</a></div>
+          <div style="margin-top:1.5em; text-align: left;">
+            <div style="font-weight: 600; color: #1a237e; margin-bottom: 0.5em;">Opening Hours:</div>
+            <div style="font-size: 0.9em; line-height: 1.4; color: #4f6dbe;">
+              • Monday–Friday: 12:00–8:00 PM<br>
+              • Saturday–Sunday: Closed
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reviews-side">
+        <h2 data-i18n="reviews_title">Reviews</h2>
+        <div class="review-stars" style="text-align: center; margin-bottom: 0.8em; font-size: 2em; color: #f7b731;">★★★★★</div>
+        <a href="https://www.google.com/search?client=safari&sca_esv=56d588efb9794462&hl=en-gr&authuser=1&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E-Iwiv5PcdSuHlUQgoWoM2xT296fBPXIijHdel6e8pLCN2oS1dmcC9b0-jSGfC4bSqkNaIKNse6r4-PjTKpYWuf4zRldsc63Pr9YPJ1gy-5S9WdCpXDXujwsyhgHQjh_OwND69NpVjt8RDjljpdKK-wLPVV9&q=%CE%92%CE%BF%CF%81%CE%AD%CE%B1%CF%82+%CE%9C%CE%B5%CE%B6%CE%B5%CE%B4%CE%BF%CF%80%CF%89%CE%BB%CE%B5%CE%AF%CE%BF+-+%CE%9C%CE%B1%CE%B3%CE%B5%CE%B9%CF%81%CE%AF%CE%BF+Reviews&sa=X&ved=2ahUKEwioh8KMgrCOAxXTQkEAHXPJJGEQ0bkNegQIJRAE&cshid=1752072438283575&biw=1528&bih=746&dpr=1.25" target="_blank" rel="noopener" class="more-reviews-btn" data-i18n="more_reviews_btn">Read Reviews</a>
+      </div>
+      <div class="social-side">
+        <h2>Follow Us</h2>
+        <div class="social-links-large">
+          <a href="https://www.instagram.com/voreas_mezedopolio/" target="_blank" rel="noopener" class="social-link-large">
+            <i class="fab fa-instagram"></i>
+            <span>Instagram</span>
+          </a>
+          <a href="https://www.facebook.com/people/%CE%92%CE%BF%CF%81%CE%AD%CE%B1%CF%82-%CE%9C%CE%B5%CE%B6%CE%B5%CE%B4%CE%BF%CF%80%CF%89%CE%BB%CE%B5%CE%AF%CE%BF/61576388332986/?mibextid=wwXIfr&rdid=gxU3HW97eOiDB6dY&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F161Qgr4EXC%2F%3Fmibextid%3DwwXIfr" target="_blank" rel="noopener" class="social-link-large">
+            <i class="fab fa-facebook"></i>
+            <span>Facebook</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+  function scrollToCategory(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  const translations = {
+    en: {
+      nav_home: 'Home',
+      nav_menu: 'Menu',
+      nav_about: 'About',
+      nav_contact: 'Contact',
+      reviews_title: 'Reviews',
+      review_2_text: 'Authentic Greek flavors, just like home. Highly recommended!',
+      review_2_name: 'Nikos K.',
+      review_3_text: 'Friendly staff and delicious meze. A hidden gem!',
+      review_3_name: 'Eleni S.',
+      more_reviews_btn: 'Read Reviews',
+      hero_title: 'Welcome to Voreas',
+      hero_sub: 'Experience modern dining with a touch of elegance.',
+      menu_title: 'Our Menu',
+      btn_starters: 'Starters',
+      btn_mains: 'Main Dishes',
+      btn_desserts: 'Desserts',
+      btn_drinks: 'Drinks',
+      cat_starters: 'Starters',
+      cat_mains: 'Main Dishes',
+      cat_desserts: 'Desserts',
+      cat_drinks: 'Drinks',
+      dish_bruschetta: 'Bruschetta',
+      desc_bruschetta: 'Grilled bread, garlic, tomatoes, olive oil',
+      dish_caesar: 'Caesar Salad',
+      desc_caesar: 'Romaine, parmesan, croutons, Caesar dressing',
+      dish_salmon: 'Grilled Salmon',
+      desc_salmon: 'Fresh salmon, lemon butter sauce, vegetables',
+      dish_ribeye: 'Ribeye Steak',
+      desc_ribeye: '12oz steak, garlic mashed potatoes, asparagus',
+      dish_tiramisu: 'Tiramisu',
+      desc_tiramisu: 'Espresso-soaked ladyfingers, mascarpone, cocoa',
+      dish_cheesecake: 'Cheesecake',
+      desc_cheesecake: 'Classic New York style, berry compote',
+      dish_espresso: 'Espresso',
+      desc_espresso: 'Rich Italian espresso',
+      dish_wine: 'Red Wine',
+      desc_wine: 'Glass of house red',
+      qr_title: 'Scan our menu',
+      qr_text: 'Scan this QR code to view our menu on your phone.<br>Update the QR code URL when your site is live.',
+      menu_intro: 'All our dishes are made with fresh, authentic Greek cuisine.',
+      about_title: 'About Us',
+      about_text_en: 'VOREAS is a mezedopoleio and mageireio in Athens, serving authentic Greek home-cooked dishes with respect for tradition and fresh, local ingredients. Every plate is a taste of Greek heritage and hospitality.',
+      about_text_gr: 'Το VOREAS είναι ένα οικογενειακό μεζεδοπωλείο και μαγειρείο στην Αθήνα, που προσφέρει αυθεντικά μαγειρευτά ελληνικά πιάτα με σεβασμό στην παράδοση και φρέσκα, τοπικά υλικά. Κάθε πιάτο είναι μια γεύση από την ελληνική φιλοξενία και παράδοση.',
+      specials_title: 'Daily Specials',
+      specials_item1: 'Moussaka',
+      specials_item2: 'Gemista (Stuffed Vegetables)',
+      specials_item3: 'Fasolada (Bean Soup)',
+      feature_authentic: 'Authentic Recipes',
+      feature_authentic_desc: 'Passed down through generations',
+      feature_fresh: 'Fresh Ingredients',
+      feature_fresh_desc: 'Locally sourced, always fresh',
+      feature_hospitality: 'Warm Hospitality',
+      feature_hospitality_desc: 'Feel like part of the family',
+      feature_tradition: 'Greek Tradition',
+      feature_tradition_desc: 'Centuries of culinary heritage',
+      feature_quality: 'Premium Quality',
+      feature_quality_desc: 'Excellence in every detail',
+      our_story_title: 'Our Story',
+      our_story_p1: 'VOREAS is a mezedopoleio and mageireio in Athens, serving authentic Greek home-cooked dishes with respect for tradition and fresh, local ingredients. Every plate is a taste of Greek heritage and hospitality.',
+      our_story_p2: "Whether you're a local or a traveler, VOREAS welcomes you with flavors that feel like home.",
+    },
+    gr: {
+      nav_home: 'Αρχική',
+      nav_menu: 'Μενού',
+      nav_about: 'Σχετικά',
+      nav_contact: 'Επικοινωνία',
+      reviews_title: 'Κριτικές',
+      review_2_text: 'Αυθεντικές ελληνικές γεύσεις, σαν στο σπίτι. Συνιστάται ανεπιφύλακτα!',
+      review_2_name: 'Νίκος Κ.',
+      review_3_text: 'Φιλικό προσωπικό και νόστιμα μεζέδες. Ένα κρυμμένο διαμάντι!',
+      review_3_name: 'Ελένη Σ.',
+      more_reviews_btn: 'Διαβάστε Κριτικές',
+      hero_title: 'Καλώς ήρθατε στο Boreas',
+      hero_sub: 'Ζήστε τη σύγχρονη γαστρονομία με μια πινελιά παράδοσης.',
+      menu_title: 'Το Μενού μας',
+      btn_starters: 'Ορεκτικά',
+      btn_mains: 'Κυρίως Πιάτα',
+      btn_desserts: 'Επιδόρπια',
+      btn_drinks: 'Ποτά',
+      cat_starters: 'Ορεκτικά',
+      cat_mains: 'Κυρίως Πιάτα',
+      cat_desserts: 'Επιδόρπια',
+      cat_drinks: 'Ποτά',
+      dish_bruschetta: 'Μπρουσκέτα',
+      desc_bruschetta: 'Ψημένο ψωμί, σκόρδο, ντομάτες, ελαιόλαδο',
+      dish_caesar: 'Σαλάτα Caesar',
+      desc_caesar: 'Ρόκα, παρμεζάνα, κρουτόν, σως Caesar',
+      dish_salmon: 'Σολομός στη σχάρα',
+      desc_salmon: 'Φρέσκος σολομός, σάλτσα λεμονιού, λαχανικά',
+      dish_ribeye: 'Μπριζόλα Ribeye',
+      desc_ribeye: '340γρ μπριζόλα, πουρές πατάτας, σπαράγγια',
+      dish_tiramisu: 'Τιραμισού',
+      desc_tiramisu: 'Σαβαγιάρ με εσπρέσο, μασκαρπόνε, κακάο',
+      dish_cheesecake: 'Τσίζκεϊκ',
+      desc_cheesecake: 'Κλασικό Νέας Υόρκης, κομπόστα φρούτων',
+      dish_espresso: 'Εσπρέσο',
+      desc_espresso: 'Πλούσιος ιταλικός εσπρέσο',
+      dish_wine: 'Κόκκινο Κρασί',
+      desc_wine: 'Ποτήρι κόκκινο κρασί',
+      qr_title: 'Σαρώστε το μενού',
+      qr_text: 'Σαρώστε αυτό το QR code για να δείτε το μενού στο κινητό σας.<br>Αλλάξτε το URL όταν το site είναι online.',
+      menu_intro: 'Όλα τα φαγητά μας είναι μαγειρευτά, αυθεντικής ελληνικής κουζίνας.',
+      about_title: 'Σχετικά με εμάς',
+      about_text_en: 'VOREAS is a mezedopoleio and mageireio in Athens, serving authentic Greek home-cooked dishes with respect for tradition and fresh, local ingredients. Every plate is a taste of Greek heritage and hospitality.',
+      about_text_gr: 'Το VOREAS είναι ένα οικογενειακό μεζεδοπωλείο και μαγειρείο στην Αθήνα, που προσφέρει αυθεντικά μαγειρευτά ελληνικά πιάτα με σεβασμό στην παράδοση και φρέσκα, τοπικά υλικά. Κάθε πιάτο είναι μια γεύση από την ελληνική φιλοξενία και παράδοση.',
+      specials_title: 'Ημερήσιες Ειδικές',
+      specials_item1: 'Μουσάκα',
+      specials_item2: 'Γεμιστά λαχανικά (Φασόλια)',
+      specials_item3: 'Φασόλα (Φασόλια)',
+      feature_authentic: 'Αυθεντικές Συνταγές',
+      feature_authentic_desc: 'Περασμένες από γενιά σε γενιά',
+      feature_fresh: 'Φρέσκα Υλικά',
+      feature_fresh_desc: 'Τοπικά προϊόντα, πάντα φρέσκα',
+      feature_hospitality: 'Θερμή Φιλοξενία',
+      feature_hospitality_desc: 'Νιώστε σαν μέλος της οικογένειας',
+      feature_tradition: 'Ελληνική Παράδοση',
+      feature_tradition_desc: 'Αιώνες κουλτουρικής κληρονομιάς',
+      feature_quality: 'Πρωτοκλασική Ποιότητα',
+      feature_quality_desc: 'Εξοχότητα σε κάθε λεπτομέρεια',
+      our_story_title: 'Η Ιστορία μας',
+      our_story_p1: 'Το VOREAS είναι ένα μεζεδοπωλείο και μαγειρείο στην Αθήνα, που προσφέρει αυθεντικά ελληνικά σπιτικά πιάτα με σεβασμό στην παράδοση και φρέσκα, τοπικά υλικά. Κάθε πιάτο είναι μια γεύση από την ελληνική κληρονομιά και φιλοξενία.',
+      our_story_p2: 'Είστε ντόπιος ή ταξιδιώτης; Το VOREAS σας καλωσορίζει με γεύσεις που θυμίζουν σπίτι.',
+    }
+  };
+
+  function setLanguage(lang) {
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    document.getElementById('lang-gr').classList.toggle('active', lang === 'gr');
+  }
+  // Set default language
+  setLanguage('en');
+  </script>
+</body>
+</html> 

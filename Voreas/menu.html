@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu - Voreas Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="logo.png" alt="Logo" class="logo-img">
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="menu.html" data-i18n="nav_menu">Menu</a></li>
+        <li><a href="about.html" data-i18n="nav_about">About</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <div class="lang-switcher">
+        <button onclick="setLanguage('en')" id="lang-en">EN</button>
+        <button onclick="setLanguage('gr')" id="lang-gr">GR</button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="menu-hero">
+    <h1 data-i18n="menu_title">Our Menu</h1>
+    <p data-i18n="menu_intro">Discover authentic Greek flavors and traditional recipes</p>
+  </section>
+
+  <section class="menu-section">
+    <div class="menu-nav">
+      <button onclick="showCategory('appetizers')" class="menu-btn active" data-i18n="btn_appetizers">Ορεκτικά</button>
+      <button onclick="showCategory('salads')" class="menu-btn" data-i18n="btn_salads">Σαλάτες</button>
+      <button onclick="showCategory('main-dishes')" class="menu-btn" data-i18n="btn_main_dishes">Κυρίως Πιάτα</button>
+      <button onclick="showCategory('desserts')" class="menu-btn" data-i18n="btn_desserts">Επιδόρπια</button>
+      <button onclick="showCategory('drinks')" class="menu-btn" data-i18n="btn_drinks">Ποτά</button>
+    </div>
+
+    <div id="appetizers" class="menu-category active">
+      <h2 data-i18n="cat_appetizers">Ορεκτικά</h2>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_tzatziki">Tzatziki</h3>
+            <p data-i18n="desc_tzatziki">Greek yogurt, cucumber, garlic, olive oil</p>
+          </div>
+          <span class="price">€4.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_hummus">Hummus</h3>
+            <p data-i18n="desc_hummus">Chickpeas, tahini, olive oil, paprika</p>
+          </div>
+          <span class="price">€5.00</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_dolmades">Dolmades</h3>
+            <p data-i18n="desc_dolmades">Grape leaves stuffed with rice and herbs</p>
+          </div>
+          <span class="price">€6.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_saganaki">Saganaki</h3>
+            <p data-i18n="desc_saganaki">Fried cheese with lemon</p>
+          </div>
+          <span class="price">€7.00</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_keftedes">Keftedes</h3>
+            <p data-i18n="desc_keftedes">Greek meatballs with herbs</p>
+          </div>
+          <span class="price">€8.50</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="main-dishes" class="menu-category">
+      <h2 data-i18n="cat_main_dishes">Main Dishes</h2>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_moussaka">Moussaka</h3>
+            <p data-i18n="desc_moussaka">Layers of eggplant, potatoes, and ground beef</p>
+          </div>
+          <span class="price">€12.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_pastitsio">Pastitsio</h3>
+            <p data-i18n="desc_pastitsio">Greek lasagna with béchamel sauce</p>
+          </div>
+          <span class="price">€11.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_souvlaki">Souvlaki</h3>
+            <p data-i18n="desc_souvlaki">Grilled pork skewers with pita</p>
+          </div>
+          <span class="price">€9.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_gemista">Gemista</h3>
+            <p data-i18n="desc_gemista">Stuffed tomatoes and peppers with rice</p>
+          </div>
+          <span class="price">€10.00</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_fasolada">Fasolada</h3>
+            <p data-i18n="desc_fasolada">Traditional bean soup</p>
+          </div>
+          <span class="price">€8.00</span>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="desserts" class="menu-category">
+      <h2 data-i18n="cat_desserts">Επιδόρπια</h2>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_baklava">Baklava</h3>
+            <p data-i18n="desc_baklava">Layered phyllo with nuts and honey</p>
+          </div>
+          <span class="price">€5.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_galaktoboureko">Galaktoboureko</h3>
+            <p data-i18n="desc_galaktoboureko">Custard pie with phyllo</p>
+          </div>
+          <span class="price">€5.00</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_kataifi">Kataifi</h3>
+            <p data-i18n="desc_kataifi">Shredded phyllo with nuts and syrup</p>
+          </div>
+          <span class="price">€5.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_yogurt_honey">Greek Yogurt with Honey</h3>
+            <p data-i18n="desc_yogurt_honey">Creamy yogurt with local honey</p>
+          </div>
+          <span class="price">€4.00</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="salads" class="menu-category">
+      <h2 data-i18n="cat_salads">Salads</h2>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_horiatiki">Horiatiki</h3>
+            <p data-i18n="desc_horiatiki">Greek salad with feta, olives, tomatoes</p>
+          </div>
+          <span class="price">€7.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_dakos">Dakos</h3>
+            <p data-i18n="desc_dakos">Cretan salad with barley rusks</p>
+          </div>
+          <span class="price">€6.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="dish_melitzanosalata">Melitzanosalata</h3>
+            <p data-i18n="desc_melitzanosalata">Eggplant salad with garlic</p>
+          </div>
+          <span class="price">€5.50</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="drinks" class="menu-category">
+      <h2 data-i18n="cat_drinks">Drinks</h2>
+      
+      <!-- Wines Section -->
+      <h3 class="drinks-category-title" data-i18n="drinks_wines">Wines</h3>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_red_wine">Red House Wine</h3>
+            <p data-i18n="desc_red_wine">Glass / Bottle</p>
+          </div>
+          <span class="price">€5.00 / €18.00</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_white_wine">White House Wine</h3>
+            <p data-i18n="desc_white_wine">Glass / Bottle</p>
+          </div>
+          <span class="price">€5.00 / €18.00</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_retsina">Retsina</h3>
+            <p data-i18n="desc_retsina">Traditional Greek resinated wine</p>
+          </div>
+          <span class="price">€4.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_rose">Local Rosé</h3>
+            <p data-i18n="desc_rose">Local rosé wine</p>
+          </div>
+          <span class="price">€5.50</span>
+        </div>
+      </div>
+
+      <!-- Alcoholic Beverages Section -->
+      <h3 class="drinks-category-title" data-i18n="drinks_alcoholic">Alcoholic Beverages</h3>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_ouzo">Ouzo</h3>
+            <p data-i18n="desc_ouzo">Traditional Greek anise-flavored spirit</p>
+          </div>
+          <span class="price">€4.00</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_tsipouro">Tsipouro</h3>
+            <p data-i18n="desc_tsipouro">Greek grape distillate</p>
+          </div>
+          <span class="price">€4.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_beer">Beer</h3>
+            <p data-i18n="desc_beer">Mythos, Fix, Alfa</p>
+          </div>
+          <span class="price">€3.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_rakomelo">Rakomelo</h3>
+            <p data-i18n="desc_rakomelo">Honey-flavored raki</p>
+          </div>
+          <span class="price">€5.00</span>
+        </div>
+      </div>
+
+      <!-- Soft Drinks Section -->
+      <h3 class="drinks-category-title" data-i18n="drinks_soft">Soft Drinks</h3>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_coca_cola">Coca-Cola / Coca-Cola Zero</h3>
+            <p data-i18n="desc_coca_cola">Refreshing cola beverages</p>
+          </div>
+          <span class="price">€2.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_fanta">Fanta Orange / Lemon</h3>
+            <p data-i18n="desc_fanta">Fruit-flavored sodas</p>
+          </div>
+          <span class="price">€2.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_sprite">Sprite</h3>
+            <p data-i18n="desc_sprite">Lemon-lime soda</p>
+          </div>
+          <span class="price">€2.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_soda_water">Soda Water</h3>
+            <p data-i18n="desc_soda_water">Sparkling water</p>
+          </div>
+          <span class="price">€1.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_tonic">Tonic</h3>
+            <p data-i18n="desc_tonic">Tonic water</p>
+          </div>
+          <span class="price">€2.00</span>
+        </div>
+      </div>
+
+      <!-- Hot Beverages Section -->
+      <h3 class="drinks-category-title" data-i18n="drinks_hot">Hot Beverages</h3>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_mountain_tea">Mountain Tea</h3>
+            <p data-i18n="desc_mountain_tea">Greek mountain tea</p>
+          </div>
+          <span class="price">€2.00</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_chamomile">Chamomile</h3>
+            <p data-i18n="desc_chamomile">Soothing chamomile tea</p>
+          </div>
+          <span class="price">€2.00</span>
+        </div>
+      </div>
+
+      <!-- Cold Beverages Section -->
+      <h3 class="drinks-category-title" data-i18n="drinks_cold">Cold Beverages</h3>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_iced_tea">Iced Tea</h3>
+            <p data-i18n="desc_iced_tea">Refreshing iced tea</p>
+          </div>
+          <span class="price">€2.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_fresh_juice">Fresh Orange Juice</h3>
+            <p data-i18n="desc_fresh_juice">Freshly squeezed orange juice</p>
+          </div>
+          <span class="price">€3.00</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_bottled_water">Bottled Water</h3>
+            <p data-i18n="desc_bottled_water">Small / Large</p>
+          </div>
+          <span class="price">€1.00 / €2.00</span>
+        </div>
+      </div>
+
+      <!-- Coffee Section -->
+      <h3 class="drinks-category-title" data-i18n="drinks_coffee">Coffee</h3>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_greek_coffee">Greek Coffee</h3>
+            <p data-i18n="desc_greek_coffee">Traditional Greek coffee</p>
+          </div>
+          <span class="price">€2.50</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_espresso">Espresso</h3>
+            <p data-i18n="desc_espresso">Strong Italian coffee</p>
+          </div>
+          <span class="price">€2.00</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_cappuccino">Cappuccino</h3>
+            <p data-i18n="desc_cappuccino">Espresso with steamed milk</p>
+          </div>
+          <span class="price">€3.00</span>
+        </div>
+        <div class="menu-item">
+          <div class="item-info">
+            <h3 data-i18n="drink_iced_coffee">Iced Coffee</h3>
+            <p data-i18n="desc_iced_coffee">Freddo Espresso / Freddo Cappuccino</p>
+          </div>
+          <span class="price">€3.50</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  const translations = {
+    en: {
+      nav_home: 'Home',
+      nav_menu: 'Menu',
+      nav_about: 'About',
+      nav_contact: 'Contact',
+      menu_title: 'Our Menu',
+      menu_intro: 'Discover authentic Greek flavors and traditional recipes',
+      btn_appetizers: 'Appetizers',
+      btn_salads: 'Salads',
+      btn_main_dishes: 'Main Dishes',
+      btn_desserts: 'Desserts',
+      btn_drinks: 'Drinks',
+      cat_appetizers: 'Appetizers',
+      cat_main_dishes: 'Main Dishes',
+      cat_salads: 'Salads',
+      cat_desserts: 'Desserts',
+      cat_drinks: 'Drinks',
+      dish_tzatziki: 'Tzatziki',
+      desc_tzatziki: 'Greek yogurt, cucumber, garlic, olive oil',
+      dish_hummus: 'Hummus',
+      desc_hummus: 'Chickpeas, tahini, olive oil, paprika',
+      dish_dolmades: 'Dolmades',
+      desc_dolmades: 'Grape leaves stuffed with rice and herbs',
+      dish_saganaki: 'Saganaki',
+      desc_saganaki: 'Fried cheese with lemon',
+      dish_keftedes: 'Keftedes',
+      desc_keftedes: 'Greek meatballs with herbs',
+      dish_moussaka: 'Moussaka',
+      desc_moussaka: 'Layers of eggplant, potatoes, and ground beef',
+      dish_pastitsio: 'Pastitsio',
+      desc_pastitsio: 'Greek lasagna with béchamel sauce',
+      dish_souvlaki: 'Souvlaki',
+      desc_souvlaki: 'Grilled pork skewers with pita',
+      dish_gemista: 'Gemista',
+      desc_gemista: 'Stuffed tomatoes and peppers with rice',
+      dish_fasolada: 'Fasolada',
+      desc_fasolada: 'Traditional bean soup',
+      dish_baklava: 'Baklava',
+      desc_baklava: 'Layered phyllo with nuts and honey',
+      dish_galaktoboureko: 'Galaktoboureko',
+      desc_galaktoboureko: 'Custard pie with phyllo',
+      dish_kataifi: 'Kataifi',
+      desc_kataifi: 'Shredded phyllo with nuts and syrup',
+      dish_yogurt_honey: 'Greek Yogurt with Honey',
+      desc_yogurt_honey: 'Creamy yogurt with local honey',
+      dish_horiatiki: 'Horiatiki',
+      desc_horiatiki: 'Greek salad with feta, olives, tomatoes',
+      dish_dakos: 'Dakos',
+      desc_dakos: 'Cretan salad with barley rusks',
+      dish_melitzanosalata: 'Melitzanosalata',
+      desc_melitzanosalata: 'Eggplant salad with garlic',
+      drink_red_wine: 'Red House Wine',
+      desc_red_wine: 'Glass / Bottle',
+      drink_white_wine: 'White House Wine',
+      desc_white_wine: 'Glass / Bottle',
+      drink_retsina: 'Retsina',
+      desc_retsina: 'Traditional Greek resinated wine',
+      drink_rose: 'Local Rosé',
+      desc_rose: 'Local rosé wine',
+      drink_ouzo: 'Ouzo',
+      desc_ouzo: 'Traditional Greek anise-flavored spirit',
+      drink_tsipouro: 'Tsipouro',
+      desc_tsipouro: 'Greek grape distillate',
+      drink_beer: 'Beer',
+      desc_beer: 'Mythos, Fix, Alfa',
+      drink_rakomelo: 'Rakomelo',
+      desc_rakomelo: 'Honey-flavored raki',
+      drink_coca_cola: 'Coca-Cola / Coca-Cola Zero',
+      desc_coca_cola: 'Refreshing cola beverages',
+      drink_fanta: 'Fanta Orange / Lemon',
+      desc_fanta: 'Fruit-flavored sodas',
+      drink_sprite: 'Sprite',
+      desc_sprite: 'Lemon-lime soda',
+      drink_soda_water: 'Soda Water',
+      desc_soda_water: 'Sparkling water',
+      drink_tonic: 'Tonic',
+      desc_tonic: 'Tonic water',
+      drink_greek_coffee: 'Greek Coffee',
+      desc_greek_coffee: 'Traditional Greek coffee',
+      drink_espresso: 'Espresso',
+      desc_espresso: 'Strong Italian coffee',
+      drink_cappuccino: 'Cappuccino',
+      desc_cappuccino: 'Espresso with steamed milk',
+      drink_mountain_tea: 'Mountain Tea',
+      desc_mountain_tea: 'Greek mountain tea',
+      drink_chamomile: 'Chamomile',
+      desc_chamomile: 'Soothing chamomile tea',
+      drink_iced_coffee: 'Iced Coffee',
+      desc_iced_coffee: 'Freddo Espresso / Freddo Cappuccino',
+      drink_iced_tea: 'Iced Tea',
+      desc_iced_tea: 'Refreshing iced tea',
+      drink_fresh_juice: 'Fresh Orange Juice',
+      desc_fresh_juice: 'Freshly squeezed orange juice',
+      drink_bottled_water: 'Bottled Water',
+      desc_bottled_water: 'Small / Large',
+      drinks_wines: 'Wines',
+      drinks_alcoholic: 'Alcoholic Beverages',
+      drinks_soft: 'Soft Drinks',
+      drinks_hot: 'Hot Beverages',
+      drinks_cold: 'Cold Beverages',
+      drinks_coffee: 'Coffee'
+    },
+    gr: {
+      nav_home: 'Αρχική',
+      nav_menu: 'Μενού',
+      nav_about: 'Σχετικά',
+      nav_contact: 'Επικοινωνία',
+      menu_title: 'Το Μενού μας',
+      menu_intro: 'Ανακαλύψτε αυθεντικές ελληνικές γεύσεις και παραδοσιακές συνταγές',
+      btn_appetizers: 'Ορεκτικά',
+      btn_salads: 'Σαλάτες',
+      btn_main_dishes: 'Κυρίως Πιάτα',
+      btn_desserts: 'Επιδόρπια',
+      btn_drinks: 'Ποτά',
+      cat_appetizers: 'Ορεκτικά',
+      cat_main_dishes: 'Κυρίως Πιάτα',
+      cat_salads: 'Σαλάτες',
+      cat_desserts: 'Επιδόρπια',
+      cat_drinks: 'Ποτά',
+      dish_tzatziki: 'Τζατζίκι',
+      desc_tzatziki: 'Ελληνικό γιαούρτι, αγγούρι, σκόρδο, ελαιόλαδο',
+      dish_hummus: 'Χούμους',
+      desc_hummus: 'Ρεβίθια, ταχίνι, ελαιόλαδο, πάπρικα',
+      dish_dolmades: 'Ντολμάδες',
+      desc_dolmades: 'Αμπελόφυλλα γεμιστά με ρύζι και βότανα',
+      dish_saganaki: 'Σαγανάκι',
+      desc_saganaki: 'Τηγανητό τυρί με λεμόνι',
+      dish_keftedes: 'Κεφτέδες',
+      desc_keftedes: 'Ελληνικά κεφτεδάκια με βότανα',
+      dish_moussaka: 'Μουσάκα',
+      desc_moussaka: 'Στρώματα μελιτζάνας, πατάτες και κιμά',
+      dish_pastitsio: 'Παστίτσιο',
+      desc_pastitsio: 'Ελληνική λαζάνια με μπεσαμέλ',
+      dish_souvlaki: 'Σουβλάκι',
+      desc_souvlaki: 'Ψητά χοιρινά ξυλάκια με πίτα',
+      dish_gemista: 'Γεμιστά',
+      desc_gemista: 'Γεμιστές ντομάτες και πιπεριές με ρύζι',
+      dish_fasolada: 'Φασολάδα',
+      desc_fasolada: 'Παραδοσιακή φασολάδα',
+      dish_baklava: 'Μπακλαβάς',
+      desc_baklava: 'Στρώματα φύλλων με καρύδια και μέλι',
+      dish_galaktoboureko: 'Γαλακτομπούρεκο',
+      desc_galaktoboureko: 'Πίτα κρέμας με φύλλο',
+      dish_kataifi: 'Καταΐφι',
+      desc_kataifi: 'Κομμένο φύλλο με καρύδια και σιρόπι',
+      dish_yogurt_honey: 'Ελληνικό Γιαούρτι με Μέλι',
+      desc_yogurt_honey: 'Κρεμώδες γιαούρτι με τοπικό μέλι',
+      dish_horiatiki: 'Χωριάτικη',
+      desc_horiatiki: 'Ελληνική σαλάτα με φέτα, ελιές, ντομάτες',
+      dish_dakos: 'Ντάκος',
+      desc_dakos: 'Κρητική σαλάτα με κριθαράκι',
+      dish_melitzanosalata: 'Μελιτζανοσαλάτα',
+      desc_melitzanosalata: 'Σαλάτα μελιτζάνας με σκόρδο',
+      drink_red_wine: 'Κόκκινος Οίνος Οίκου',
+      desc_red_wine: 'Ποτήρι / Μπουκάλι',
+      drink_white_wine: 'Λευκός Οίνος Οίκου',
+      desc_white_wine: 'Ποτήρι / Μπουκάλι',
+      drink_retsina: 'Ρετσίνα',
+      desc_retsina: 'Παραδοσιακός ελληνικός ρετσινάτος οίνος',
+      drink_rose: 'Τοπικό Ροζέ',
+      desc_rose: 'Τοπικό ροζέ κρασί',
+      drink_ouzo: 'Ούζο',
+      desc_ouzo: 'Παραδοσιακό ελληνικό πνευματώδες με γλυκάνισο',
+      drink_tsipouro: 'Τσίπουρο',
+      desc_tsipouro: 'Ελληνικό κρασοσταγμα',
+      drink_beer: 'Μπύρα',
+      desc_beer: 'Μύθος, Φιξ, Άλφα',
+      drink_rakomelo: 'Ρακόμελο',
+      desc_rakomelo: 'Ρακί με μέλι',
+      drink_coca_cola: 'Coca-Cola / Coca-Cola Zero',
+      desc_coca_cola: 'Δροσιστικά ποτά κόλα',
+      drink_fanta: 'Fanta Πορτοκάλι / Λεμόνι',
+      desc_fanta: 'Φρουτώδη σόδα',
+      drink_sprite: 'Sprite',
+      desc_sprite: 'Λεμονάδα-λάιμ σόδα',
+      drink_soda_water: 'Σόδα',
+      desc_soda_water: 'Αεριούχο νερό',
+      drink_tonic: 'Τόνικ',
+      desc_tonic: 'Τονικό νερό',
+      drink_greek_coffee: 'Ελληνικός Καφές',
+      desc_greek_coffee: 'Παραδοσιακός ελληνικός καφές',
+      drink_espresso: 'Εσπρέσο',
+      desc_espresso: 'Δυνατός ιταλικός καφές',
+      drink_cappuccino: 'Καπουτσίνο',
+      desc_cappuccino: 'Εσπρέσο με ατμόγαλα',
+      drink_mountain_tea: 'Βουνίσιος Τσάι',
+      desc_mountain_tea: 'Ελληνικό βουνίσιο τσάι',
+      drink_chamomile: 'Καμομήλι',
+      desc_chamomile: 'Ηρεμιστικό τσάι καμομήλι',
+      drink_iced_coffee: 'Παγωμένος Καφές',
+      desc_iced_coffee: 'Φρέντο Εσπρέσο / Φρέντο Καπουτσίνο',
+      drink_iced_tea: 'Παγωμένο Τσάι',
+      desc_iced_tea: 'Δροσιστικό παγωμένο τσάι',
+      drink_fresh_juice: 'Φρέσκο Πορτοκαλάδα',
+      desc_fresh_juice: 'Φρέσκο χυμό πορτοκαλιού',
+      drink_bottled_water: 'Νερό σε Μπουκάλι',
+      desc_bottled_water: 'Μικρό / Μεγάλο',
+      drinks_wines: 'Κρασιά',
+      drinks_alcoholic: 'Πνευματώδη Ποτά',
+      drinks_soft: 'Αναψυκτικά',
+      drinks_hot: 'Ζεστά Ποτά',
+      drinks_cold: 'Κρύα Ποτά',
+      drinks_coffee: 'Καφές'
+    }
+  };
+
+  function setLanguage(lang) {
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    document.getElementById('lang-gr').classList.toggle('active', lang === 'gr');
+  }
+
+  function showCategory(categoryId) {
+    // Hide all categories
+    const categories = document.querySelectorAll('.menu-category');
+    categories.forEach(cat => cat.classList.remove('active'));
+    
+    // Show selected category
+    document.getElementById(categoryId).classList.add('active');
+    
+    // Update button states
+    const buttons = document.querySelectorAll('.menu-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  // Set default language
+  setLanguage('en');
+  </script>
+</body>
+</html> 

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Voreas Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="logo.png" alt="Logo" class="logo-img">
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="menu.html" data-i18n="nav_menu">Menu</a></li>
+        <li><a href="about.html" data-i18n="nav_about">About</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <div class="lang-switcher">
+        <button onclick="setLanguage('en')" id="lang-en">EN</button>
+        <button onclick="setLanguage('gr')" id="lang-gr">GR</button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="contact-hero">
+    <h1 data-i18n="contact_title">Contact Us</h1>
+    <p data-i18n="contact_subtitle">Get in touch with us for reservations, questions, or just to say hello!</p>
+  </section>
+
+  <section class="contact-page-section">
+    <div class="contact-page-container">
+      <div class="contact-info-card">
+        <h2 data-i18n="contact_info_title">Contact Information</h2>
+        <div class="contact-details">
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h3 data-i18n="address_title">Address</h3>
+              <a href="https://maps.google.com/?q=Αλεξάνδρου Πάντου 18, Καλλιθέα, 17671" target="_blank" rel="noopener" class="contact-link">Αλεξάνδρου Πάντου 18, Καλλιθέα, 17671</a>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h3 data-i18n="phone_title">Phone</h3>
+              <a href="tel:2109217500" class="contact-link">210 9217500</a>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h3 data-i18n="email_title">Email</h3>
+              <a href="mailto:Voreaseatery@gmail.com" class="contact-link">Voreaseatery@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hours-card">
+        <h2 data-i18n="hours_title">Opening Hours</h2>
+        <div class="hours-list">
+          <div class="hours-item">
+            <span class="day" data-i18n="monday_friday">Monday–Friday</span>
+            <span class="time">12:00–8:00 PM</span>
+          </div>
+          <div class="hours-item">
+            <span class="day" data-i18n="saturday_sunday">Saturday–Sunday</span>
+            <span class="time closed" data-i18n="closed">Closed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="social-card">
+        <h2 data-i18n="social_title">Follow Us</h2>
+        <div class="social-links-page">
+          <a href="https://www.instagram.com/voreas_mezedopolio/" target="_blank" rel="noopener" class="social-link-page">
+            <i class="fab fa-instagram"></i>
+            <span>Instagram</span>
+          </a>
+          <a href="https://www.facebook.com/people/%CE%92%CE%BF%CF%81%CE%AD%CE%B1%CF%82-%CE%9C%CE%B5%CE%B6%CE%B5%CE%B4%CE%BF%CF%80%CF%89%CE%BB%CE%B5%CE%AF%CE%BF/61576388332986/?mibextid=wwXIfr&rdid=gxU3HW97eOiDB6dY&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F161Qgr4EXC%2F%3Fmibextid%3DwwXIfr" target="_blank" rel="noopener" class="social-link-page">
+            <i class="fab fa-facebook"></i>
+            <span>Facebook</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  const translations = {
+    en: {
+      nav_home: 'Home',
+      nav_menu: 'Menu',
+      nav_about: 'About',
+      nav_contact: 'Contact',
+      contact_title: 'Contact Us',
+      contact_subtitle: 'Get in touch with us for reservations, questions, or just to say hello!',
+      contact_info_title: 'Contact Information',
+      address_title: 'Address',
+      phone_title: 'Phone',
+      email_title: 'Email',
+      hours_title: 'Opening Hours',
+      monday_friday: 'Monday–Friday',
+      saturday_sunday: 'Saturday–Sunday',
+      closed: 'Closed',
+      social_title: 'Follow Us'
+    },
+    gr: {
+      nav_home: 'Αρχική',
+      nav_menu: 'Μενού',
+      nav_about: 'Σχετικά',
+      nav_contact: 'Επικοινωνία',
+      contact_title: 'Επικοινωνήστε μαζί μας',
+      contact_subtitle: 'Επικοινωνήστε μαζί μας για κρατήσεις, ερωτήσεις ή απλά για να πείτε ένα γεια!',
+      contact_info_title: 'Στοιχεία Επικοινωνίας',
+      address_title: 'Διεύθυνση',
+      phone_title: 'Τηλέφωνο',
+      email_title: 'Email',
+      hours_title: 'Ώρες Λειτουργίας',
+      monday_friday: 'Δευτέρα–Παρασκευή',
+      saturday_sunday: 'Σάββατο–Κυριακή',
+      closed: 'Κλειστά',
+      social_title: 'Ακολουθήστε μας'
+    }
+  };
+
+  function setLanguage(lang) {
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    document.getElementById('lang-gr').classList.toggle('active', lang === 'gr');
+  }
+
+  // Set default language
+  setLanguage('en');
+  </script>
+</body>
+</html> 

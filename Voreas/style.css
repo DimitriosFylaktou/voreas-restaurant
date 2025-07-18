@@ -1274,6 +1274,62 @@ footer {
   .contact-info-card, .hours-card, .social-card {
     padding: 1.5rem;
   }
+  /* Make menu items stack and fit screen */
+  .menu-section, .menu-category, .menu-items, .menu-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+  .menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.7em 0.5em;
+    margin-bottom: 0.7em;
+    border-bottom: 1px solid #eee;
+  }
+  .menu-item-name {
+    font-size: 1.1em;
+    margin-bottom: 0.2em;
+    word-break: break-word;
+  }
+  .menu-item-desc {
+    font-size: 0.98em;
+    color: #555;
+    margin-bottom: 0.2em;
+  }
+  .menu-item-price {
+    font-size: 1em;
+    color: #4f6dbe;
+    font-weight: bold;
+    margin-left: 0.5em;
+  }
+  /* Reduce padding/margin for headings */
+  .menu-category h2, .menu-category h3 {
+    margin-top: 0.7em;
+    margin-bottom: 0.4em;
+    font-size: 1.2em;
+  }
+  .menu-category li {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.3rem !important;
+    padding: 0.7rem 0 !important;
+  }
+  .dish-name, .dish-desc, .dish-price {
+    min-width: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    word-break: break-word;
+    text-align: left;
+  }
+  .dish-img {
+    margin-bottom: 0.5em;
+    margin-right: 0;
+    width: 60px;
+    height: 60px;
+  }
 } 
 
 /* About Page Styles */
@@ -1464,44 +1520,5 @@ footer {
   .hero .about-banner {
     height: 300px;
     max-height: 50vh;
-  }
-} 
-
-@media (max-width: 700px) {
-  /* Make menu items stack and fit screen */
-  .menu-section, .menu-category, .menu-items, .menu-item {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box;
-  }
-  .menu-item {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0.7em 0.5em;
-    margin-bottom: 0.7em;
-    border-bottom: 1px solid #eee;
-  }
-  .menu-item-name {
-    font-size: 1.1em;
-    margin-bottom: 0.2em;
-    word-break: break-word;
-  }
-  .menu-item-desc {
-    font-size: 0.98em;
-    color: #555;
-    margin-bottom: 0.2em;
-  }
-  .menu-item-price {
-    font-size: 1em;
-    color: #4f6dbe;
-    font-weight: bold;
-    margin-left: 0.5em;
-  }
-  /* Reduce padding/margin for headings */
-  .menu-category h2, .menu-category h3 {
-    margin-top: 0.7em;
-    margin-bottom: 0.4em;
-    font-size: 1.2em;
   }
 } 

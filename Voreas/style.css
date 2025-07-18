@@ -1466,3 +1466,42 @@ footer {
     max-height: 50vh;
   }
 } 
+
+@media (max-width: 700px) {
+  /* Make menu items stack and fit screen */
+  .menu-section, .menu-category, .menu-items, .menu-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+  .menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.7em 0.5em;
+    margin-bottom: 0.7em;
+    border-bottom: 1px solid #eee;
+  }
+  .menu-item-name {
+    font-size: 1.1em;
+    margin-bottom: 0.2em;
+    word-break: break-word;
+  }
+  .menu-item-desc {
+    font-size: 0.98em;
+    color: #555;
+    margin-bottom: 0.2em;
+  }
+  .menu-item-price {
+    font-size: 1em;
+    color: #4f6dbe;
+    font-weight: bold;
+    margin-left: 0.5em;
+  }
+  /* Reduce padding/margin for headings */
+  .menu-category h2, .menu-category h3 {
+    margin-top: 0.7em;
+    margin-bottom: 0.4em;
+    font-size: 1.2em;
+  }
+} 

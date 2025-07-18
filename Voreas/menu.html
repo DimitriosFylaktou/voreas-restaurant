@@ -274,6 +274,54 @@
 
   // Set default language
   setLanguage('en');
+
+  const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTmkkP3zI0_a5U3cLy18-JRkH9691rsFLvvDVG5C2ijRBw6BxmdbIWfeH2nVqZfDBFSth71FrnpmZrJ/pub?output=csv";
+
+  function parseCSV(text) {
+    const lines = text.trim().split('\n');
+    const headers = lines[0].split(',');
+    return lines.slice(1).map(line => {
+      const values = line.split(',');
+      const obj = {};
+      headers.forEach((header, i) => {
+        obj[header.trim()] = values[i] ? values[i].trim() : '';
+      });
+      return obj;
+    });
+  }
+
+  function renderMenu(items) {
+    const menuDiv = document.getElementById('dynamic-menu');
+    if (!menuDiv) return;
+    let html = '';
+    let lastCategory = '';
+    items.forEach(item => {
+      if (item.Available && item.Available.toLowerCase() === 'true') {
+        if (item.Category !== lastCategory) {
+          html += `<h2>${item.Category}</h2>`;
+          lastCategory = item.Category;
+        }
+        html += `
+          <div class="menu-item">
+            <div class="menu-item-name"><strong>${item['Dish Name']}</strong> <span class="menu-item-price">${item.Price}</span></div>
+            <div class="menu-item-desc">${item.Description}</div>
+          </div>
+        `;
+      }
+    });
+    menuDiv.innerHTML = html;
+  }
+
+  fetch(SHEET_URL)
+    .then(response => response.text())
+    .then(csv => {
+      const items = parseCSV(csv);
+      renderMenu(items);
+    })
+    .catch(err => {
+      document.getElementById('dynamic-menu').innerHTML = "Menu unavailable.";
+      console.error("Menu fetch error:", err);
+    });
   </script>
 </body>
 </html> 

@@ -293,21 +293,34 @@
   function renderMenu(items) {
     const menuDiv = document.getElementById('dynamic-menu');
     if (!menuDiv) return;
-    let html = '';
-    let lastCategory = '';
+
+    // Group items by normalized category
+    const grouped = {};
     items.forEach(item => {
-      if (item.Available && item.Available.toLowerCase() === 'true') {
-        if (item.Category !== lastCategory) {
-          html += `<h2>${item.Category}</h2>`;
-          lastCategory = item.Category;
-        }
+      if (item.Available && item.Available.trim().toLowerCase() === 'true') {
+        // Normalize category: trim and lowercase
+        const rawCategory = item.Category || '';
+        const category = rawCategory.trim().toLowerCase();
+        if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
+        grouped[category].items.push(item);
+      }
+    });
+
+    // Sort categories by their first appearance
+    const orderedCategories = Object.values(grouped);
+
+    // Build HTML
+    let html = '';
+    orderedCategories.forEach(group => {
+      html += `<h2>${group.name}</h2>`;
+      group.items.forEach(item => {
         html += `
           <div class="menu-item">
             <div class="menu-item-name"><strong>${item['Dish Name']}</strong> <span class="menu-item-price">${item.Price}</span></div>
             <div class="menu-item-desc">${item.Description}</div>
           </div>
         `;
-      }
+      });
     });
     menuDiv.innerHTML = html;
   }

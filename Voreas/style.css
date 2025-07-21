@@ -1583,3 +1583,10 @@ footer {
     max-width: 48vw;
   }
 } 
+
+@media (max-width: 700px) {
+  .site-title {
+    font-size: 1.1em;
+    white-space: normal;
+  }
+} 

@@ -279,16 +279,25 @@
 
   function parseCSV(text) {
     const lines = text.trim().split('\n');
-    const headers = lines[0].split(',');
+    const headers = lines[0].split(',').map(h => h.trim());
+
+    // This regex correctly splits by comma, but ignores commas inside double quotes
+    const regex = /(".*?"|[^",]+)(?=\s*,|\s*$)/g;
+    
     return lines.slice(1).map(line => {
-      const values = line.split(',');
-      const obj = {};
-      headers.forEach((header, i) => {
-        obj[header.trim()] = values[i] ? values[i].trim() : '';
-      });
-      return obj;
+        const values = line.match(regex) || [];
+        const obj = {};
+        headers.forEach((header, i) => {
+            let value = (values[i] || '').trim();
+            // Remove quotes from start and end if they exist
+            if (value.startsWith('"') && value.endsWith('"')) {
+                value = value.substring(1, value.length - 1);
+            }
+            obj[header] = value;
+        });
+        return obj;
     });
-  }
+}
 
   function renderMenu(items) {
     const menuDiv = document.getElementById('dynamic-menu');

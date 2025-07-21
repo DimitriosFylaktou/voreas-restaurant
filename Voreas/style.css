@@ -649,6 +649,27 @@ footer {
   }
 }
 
+@media (max-width: 700px) {
+  .features-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    justify-items: center;
+  }
+  .feature-circle {
+    width: 140px;
+    height: 140px;
+    min-width: 140px;
+    min-height: 140px;
+    max-width: 140px;
+    max-height: 140px;
+  }
+  .features-container .feature-circle:nth-child(5) {
+    grid-column: 1 / span 2;
+    justify-self: center;
+  }
+}
+
 .story-section {
   padding: 4rem 0;
   background: #f8fafd;

@@ -1222,7 +1222,7 @@ footer {
 }
 @media (max-width: 900px) {
   .image-row {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 1.5rem;
     align-items: center;
   }

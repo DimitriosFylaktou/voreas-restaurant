@@ -353,7 +353,7 @@ nav {
   max-width: none;
   margin: 1rem 0 0 0;
   padding: 2rem 0 2rem 0;
-  background: linear-gradient(120deg, #e3eafc 0%, #f8fafd 100%);
+  background: #E7DEBE;
   border-radius: 0;
   box-shadow: 0 4px 32px rgba(26,35,126,0.10);
   position: relative;
@@ -576,7 +576,7 @@ footer {
 /* Features Section Styling */
 .features-section {
   padding: 2rem 0 4rem 0;
-  background: #f8fafd;
+  background: #E7DEBE;
 }
 
 .features-container {

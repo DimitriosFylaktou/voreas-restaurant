@@ -54,6 +54,10 @@
         </div>
       </div>
       
+      <!-- Navigation arrows -->
+      <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+      <a class="next" onclick="changeSlide(1)">&#10095;</a>
+      
       <!-- Navigation dots -->
       <div class="dots-container">
         <span class="dot active" onclick="currentSlide(1)"></span>
@@ -171,6 +175,20 @@
   
   function currentSlide(n) {
     slideIndex = n - 1;
+    showSlides();
+  }
+  
+  function changeSlide(direction) {
+    const slides = document.getElementsByClassName("slide");
+    slideIndex += direction;
+    
+    if (slideIndex >= slides.length) {
+      slideIndex = 0;
+    }
+    if (slideIndex < 0) {
+      slideIndex = slides.length - 1;
+    }
+    
     showSlides();
   }
   

@@ -247,6 +247,9 @@
   };
 
   function setLanguage(lang) {
+    // Save language preference to localStorage
+    localStorage.setItem('selectedLanguage', lang);
+    
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
       const key = el.getAttribute('data-i18n');
@@ -272,8 +275,15 @@
     event.target.classList.add('active');
   }
 
-  // Set default language
-  setLanguage('en');
+  // Load saved language preference or default to English
+  function loadSavedLanguage() {
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    const defaultLanguage = savedLanguage || 'en';
+    setLanguage(defaultLanguage);
+  }
+  
+  // Initialize language when page loads
+  loadSavedLanguage();
 
   const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTmkkP3zI0_a5U3cLy18-JRkH9691rsFLvvDVG5C2ijRBw6BxmdbIWfeH2nVqZfDBFSth71FrnpmZrJ/pub?output=csv";
 

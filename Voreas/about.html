@@ -98,6 +98,9 @@
   };
 
   function setLanguage(lang) {
+    // Save language preference to localStorage
+    localStorage.setItem('selectedLanguage', lang);
+    
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
       const key = el.getAttribute('data-i18n');
@@ -109,8 +112,15 @@
     document.getElementById('lang-gr').classList.toggle('active', lang === 'gr');
   }
 
-  // Set default language
-  setLanguage('en');
+  // Load saved language preference or default to English
+  function loadSavedLanguage() {
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    const defaultLanguage = savedLanguage || 'en';
+    setLanguage(defaultLanguage);
+  }
+  
+  // Initialize language when page loads
+  loadSavedLanguage();
   </script>
 </body>
 </html> 

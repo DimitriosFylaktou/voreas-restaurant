@@ -29,29 +29,40 @@
     </nav>
   </header>
   <section id="home" class="hero">
-    <div class="banner-container">
-      <div class="banner-left">
-        <img src="Voreasabout-photo.jpg" alt="Voreas Banner" class="about-banner">
+    <div class="slideshow-container">
+      <div class="slide fade">
+        <img src="Voreasabout-photo.jpg" alt="Voreas Banner" class="slide-image">
+        <div class="slide-content">
+          <h1 class="site-title">Μεζεδοπωλείο • Μαγειρείο</h1>
+        </div>
       </div>
-      <div class="banner-right">
-        <div class="contact-banner">
-          <h3 data-i18n="contact_title">Contact</h3>
-          <div class="contact-banner-info">
-            <p><span style="font-size:1.2em;">📍</span> <a href="https://maps.google.com/?q=Αλεξάνδρου Πάντου 18, Καλλιθέα, 17671" target="_blank" rel="noopener" class="contact-link">Αλεξάνδρου Πάντου 18, Καλλιθέα, 17671</a></p>
-            <p><span style="font-size:1.2em;">📞</span> <a href="tel:2109217500" class="contact-link">210 9217500</a></p>
-            <p><span style="font-size:1.2em;">✉️</span> <a href="mailto:Voreaseatery@gmail.com" class="contact-link">Voreaseatery@gmail.com</a></p>
-            <div class="opening-hours">
-              <div class="hours-title" data-i18n="opening_hours">Opening Hours:</div>
-              <div class="hours-details">
-                <div data-i18n="hours_weekdays">• Monday–Friday: 12:00–8:00 PM</div>
-                <div data-i18n="hours_weekend">• Saturday–Sunday: Closed</div>
+      
+      <div class="slide fade">
+        <div class="contact-slide">
+          <div class="contact-slide-content">
+            <h3 data-i18n="contact_title">Contact</h3>
+            <div class="contact-slide-info">
+              <p><span style="font-size:1.2em;">📍</span> <a href="https://maps.google.com/?q=Αλεξάνδρου Πάντου 18, Καλλιθέα, 17671" target="_blank" rel="noopener" class="contact-link">Αλεξάνδρου Πάντου 18, Καλλιθέα, 17671</a></p>
+              <p><span style="font-size:1.2em;">📞</span> <a href="tel:2109217500" class="contact-link">210 9217500</a></p>
+              <p><span style="font-size:1.2em;">✉️</span> <a href="mailto:Voreaseatery@gmail.com" class="contact-link">Voreaseatery@gmail.com</a></p>
+              <div class="opening-hours">
+                <div class="hours-title" data-i18n="opening_hours">Opening Hours:</div>
+                <div class="hours-details">
+                  <div data-i18n="hours_weekdays">• Monday–Friday: 12:00–8:00 PM</div>
+                  <div data-i18n="hours_weekend">• Saturday–Sunday: Closed</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      
+      <!-- Navigation dots -->
+      <div class="dots-container">
+        <span class="dot active" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+      </div>
     </div>
-    <h1 class="site-title">Μεζεδοπωλείο • Μαγειρείο</h1>
   </section>
   <section class="image-row">
     <div class="image-col left">
@@ -136,6 +147,46 @@
     </div>
   </section>
   <script>
+  // Slideshow functionality
+  let slideIndex = 0;
+  let slideInterval;
+  
+  function showSlides() {
+    const slides = document.getElementsByClassName("slide");
+    const dots = document.getElementsByClassName("dot");
+    
+    // Hide all slides
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+      dots[i].classList.remove("active");
+    }
+    
+    // Move to next slide
+    slideIndex++;
+    if (slideIndex > slides.length) {
+      slideIndex = 1;
+    }
+    
+    // Show current slide
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].classList.add("active");
+  }
+  
+  function currentSlide(n) {
+    slideIndex = n - 1;
+    showSlides();
+  }
+  
+  function startSlideshow() {
+    showSlides(); // Show first slide immediately
+    slideInterval = setInterval(showSlides, 4000); // Change slide every 4 seconds
+  }
+  
+  // Start slideshow when page loads
+  document.addEventListener('DOMContentLoaded', function() {
+    startSlideshow();
+  });
+  
   function scrollToCategory(id) {
     const el = document.getElementById(id);
     if (el) {

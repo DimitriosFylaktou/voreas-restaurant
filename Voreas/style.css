@@ -359,6 +359,12 @@ nav {
   position: relative;
 }
 
+@media (max-width: 700px) {
+  .contact-reviews-social-section {
+    padding: 1rem 0 1rem 0;
+  }
+}
+
 .contact-reviews-social-container {
   display: flex;
   justify-content: center;
@@ -1288,13 +1294,38 @@ footer {
   .contact-reviews-social-container {
     flex-direction: column;
     align-items: stretch;
+    gap: 1rem;
+    padding: 0 1rem;
   }
   .contact-side, .reviews-side, .social-side {
     flex: 1 1 0;
-    min-height: 260px;
+    min-height: 180px;
     display: flex;
     flex-direction: column;
     justify-content: stretch;
+    padding: 1rem 1rem;
+  }
+  
+  .contact-side h2, .reviews-side h2, .social-side h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .social-links-large {
+    gap: 0.5rem;
+  }
+  
+  .social-link-large {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .social-link-large i {
+    font-size: 1.2rem;
+  }
+  
+  .social-link-large span {
+    font-size: 0.9rem;
   }
   .menu-nav {
     gap: 0.5rem;

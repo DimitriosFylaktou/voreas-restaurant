@@ -489,8 +489,8 @@ nav {
 
 @media (max-width: 700px) {
   .slideshow-container {
-    height: 300px;
-    max-height: 40vh;
+    height: 400px;
+    max-height: 60vh;
   }
   
   .contact-slide-content {
@@ -2104,7 +2104,7 @@ footer {
 
 @media (max-width: 480px) {
   .slideshow-container {
-    height: 250px;
-    max-height: 35vh;
+    height: 350px;
+    max-height: 50vh;
   }
 } 

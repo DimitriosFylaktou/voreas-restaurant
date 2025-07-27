@@ -559,9 +559,19 @@ nav {
     text-align: center;
   }
   
+  .daily-dishes-link {
+    font-size: 1.1rem;
+    padding: 0.6rem 1rem;
+    text-align: center;
+    display: block;
+    margin: 1rem auto 0 auto;
+    max-width: 90%;
+  }
+  
   .contact-section-slide {
     padding-left: 0;
     text-align: center;
+    margin-top: 1rem;
   }
   
   .contact-section-slide h3 {

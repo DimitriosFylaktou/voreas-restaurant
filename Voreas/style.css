@@ -312,8 +312,8 @@ nav {
 }
 .about-banner {
   width: 100%;
-  height: 180px;
-  max-height: 30vw;
+  height: 500px;
+  max-height: 60vh;
   object-fit: cover;
   display: block;
   margin: 0;
@@ -353,6 +353,11 @@ nav {
   .prev, .next {
     padding: 12px;
     font-size: 16px;
+  }
+  
+  .about-banner {
+    height: 250px;
+    max-height: 40vh;
   }
 }
 .menu-section {

@@ -156,9 +156,9 @@
     const slides = document.getElementsByClassName("slide");
     const dots = document.getElementsByClassName("dot");
     
-    // Hide all slides
+    // Remove all classes from slides
     for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
+      slides[i].classList.remove("active", "prev");
       dots[i].classList.remove("active");
     }
     
@@ -168,8 +168,16 @@
       slideIndex = 1;
     }
     
+    // Set previous slide
+    const prevIndex = slideIndex - 2;
+    if (prevIndex >= 0) {
+      slides[prevIndex].classList.add("prev");
+    } else {
+      slides[slides.length - 1].classList.add("prev");
+    }
+    
     // Show current slide
-    slides[slideIndex - 1].style.display = "block";
+    slides[slideIndex - 1].classList.add("active");
     dots[slideIndex - 1].classList.add("active");
   }
   
@@ -180,6 +188,14 @@
   
   function changeSlide(direction) {
     const slides = document.getElementsByClassName("slide");
+    const dots = document.getElementsByClassName("dot");
+    
+    // Remove all classes from slides
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].classList.remove("active", "prev");
+      dots[i].classList.remove("active");
+    }
+    
     slideIndex += direction;
     
     if (slideIndex >= slides.length) {
@@ -189,7 +205,17 @@
       slideIndex = slides.length - 1;
     }
     
-    showSlides();
+    // Set previous slide
+    const prevIndex = slideIndex - 1;
+    if (prevIndex >= 0) {
+      slides[prevIndex].classList.add("prev");
+    } else {
+      slides[slides.length - 1].classList.add("prev");
+    }
+    
+    // Show current slide
+    slides[slideIndex].classList.add("active");
+    dots[slideIndex].classList.add("active");
   }
   
   function startSlideshow() {

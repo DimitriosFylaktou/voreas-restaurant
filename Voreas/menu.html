@@ -259,6 +259,11 @@
     });
     document.getElementById('lang-en').classList.toggle('active', lang === 'en');
     document.getElementById('lang-gr').classList.toggle('active', lang === 'gr');
+    
+    // Re-render the menu with the new language
+    if (window.menuData) {
+      renderMenu(window.menuData);
+    }
   }
 
   function showCategory(categoryId) {
@@ -313,12 +318,20 @@
     const menuDiv = document.getElementById('dynamic-menu');
     if (!menuDiv) return;
 
+    // Get current language
+    const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+    
+    // Determine which columns to use based on language
+    const dishNameColumn = currentLang === 'gr' ? 'Dish Name GR' : 'Dish Name';
+    const descriptionColumn = currentLang === 'gr' ? 'Description GR' : 'Description';
+    const categoryColumn = currentLang === 'gr' ? 'Category GR' : 'Category';
+
     // Group items by normalized category
     const grouped = {};
     items.forEach(item => {
       if (item.Available && item.Available.trim().toLowerCase() === 'true') {
-        // Normalize category: trim and lowercase
-        const rawCategory = item.Category || '';
+        // Use the appropriate category column based on language
+        const rawCategory = item[categoryColumn] || item.Category || '';
         const category = rawCategory.trim().toLowerCase();
         if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
         grouped[category].items.push(item);
@@ -333,10 +346,14 @@
     orderedCategories.forEach(group => {
       html += `<h2>${group.name}</h2>`;
       group.items.forEach(item => {
+        // Use the appropriate columns based on language
+        const dishName = item[dishNameColumn] || item['Dish Name'] || '';
+        const description = item[descriptionColumn] || item.Description || '';
+        
         html += `
           <div class="menu-item">
-            <div class="menu-item-name"><strong>${item['Dish Name']}</strong> <span class="menu-item-price">${item.Price}</span></div>
-            <div class="menu-item-desc">${item.Description}</div>
+            <div class="menu-item-name"><strong>${dishName}</strong> <span class="menu-item-price">${item.Price}</span></div>
+            <div class="menu-item-desc">${description}</div>
           </div>
         `;
       });
@@ -348,6 +365,8 @@
     .then(response => response.text())
     .then(csv => {
       const items = parseCSV(csv);
+      // Store menu data globally for language switching
+      window.menuData = items;
       renderMenu(items);
     })
     .catch(err => {

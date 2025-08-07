@@ -489,6 +489,12 @@ nav {
   margin: 0;
   border-radius: 0;
   background: #f8fafd;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.about-banner:hover {
+  transform: scale(1.01);
 }
 
 @media (max-width: 700px) {
@@ -537,8 +543,9 @@ nav {
   }
   
   .about-banner {
-    height: 250px;
-    max-height: 40vh;
+    height: 300px;
+    max-height: 45vh;
+    border-radius: 0;
   }
   
   .blank-slide {
@@ -2033,6 +2040,11 @@ footer {
   .about-image-section {
     margin: 1.5rem 0;
   }
+  
+  .about-banner {
+    height: 400px;
+    max-height: 55vh;
+  }
 }
 
 @media (max-width: 600px) {
@@ -2154,6 +2166,11 @@ footer {
   .welcome-banner {
     height: 450px;
     max-height: 65vh;
+  }
+  
+  .about-banner {
+    height: 250px;
+    max-height: 40vh;
   }
 } 
 

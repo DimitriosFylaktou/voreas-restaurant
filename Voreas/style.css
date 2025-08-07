@@ -1991,47 +1991,24 @@ footer {
   font-family: 'Open Sans', Arial, sans-serif;
 }
 
-.about-features {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-.feature {
-  background: #fff;
-  padding: 1.5rem;
+.about-image-section {
+  width: 100%;
+  margin: 2rem 0;
   border-radius: 1rem;
-  box-shadow: 0 2px 12px rgba(26, 35, 126, 0.08);
-  border: 1px solid #e0e0e0;
-  text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.feature:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(26, 35, 126, 0.12);
-}
-
-.feature i {
-  font-size: 2.5rem;
-  color: #333333;
-  margin-bottom: 1rem;
+.about-content-image {
+  width: 100%;
+  height: auto;
   display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-.feature h3 {
-  font-family: 'Cinzel', Georgia, serif;
-  font-size: 1.3rem;
-  color: #000000;
-  margin: 0 0 0.5rem 0;
-  letter-spacing: 0.5px;
-}
-
-.feature p {
-  font-size: 1rem;
-  color: #333333;
-  margin: 0;
-  font-family: 'Open Sans', Arial, sans-serif;
+.about-content-image:hover {
+  transform: scale(1.02);
 }
 
 /* Responsive design for About page */
@@ -2051,6 +2028,10 @@ footer {
   
   .about-hero-content p {
     font-size: 1.1rem;
+  }
+  
+  .about-image-section {
+    margin: 1.5rem 0;
   }
 }
 
@@ -2080,16 +2061,12 @@ footer {
     font-size: 1rem;
   }
   
-  .feature {
-    padding: 1.2rem;
+  .about-image-section {
+    margin: 1rem 0;
   }
   
-  .feature i {
-    font-size: 2rem;
-  }
-  
-  .feature h3 {
-    font-size: 1.2rem;
+  .about-content-image {
+    border-radius: 0.6rem;
   }
 } 
 

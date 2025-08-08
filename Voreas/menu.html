@@ -34,6 +34,13 @@
     <p data-i18n="menu_intro">Discover authentic Greek flavors and traditional recipes</p>
   </section>
 
+  <!-- Category Navigation Bar -->
+  <div class="category-nav-container">
+    <div class="category-nav" id="categoryNav">
+      <!-- Categories will be dynamically populated here -->
+    </div>
+  </div>
+
   <section class="menu-section">
     <div id="dynamic-menu"></div>
   </section>
@@ -316,7 +323,8 @@
 
   function renderMenu(items) {
     const menuDiv = document.getElementById('dynamic-menu');
-    if (!menuDiv) return;
+    const categoryNav = document.getElementById('categoryNav');
+    if (!menuDiv || !categoryNav) return;
 
     // Get current language
     const currentLang = localStorage.getItem('selectedLanguage') || 'en';
@@ -341,9 +349,19 @@
     // Sort categories by their first appearance
     const orderedCategories = Object.values(grouped);
 
-    // Build HTML
+    // Build category navigation
+    let navHtml = '';
+    orderedCategories.forEach((group, index) => {
+      const categoryId = `category-${index}`;
+      navHtml += `<button class="category-btn" data-category="${categoryId}">${group.name}</button>`;
+    });
+    categoryNav.innerHTML = navHtml;
+
+    // Build menu HTML
     let html = '';
-    orderedCategories.forEach(group => {
+    orderedCategories.forEach((group, index) => {
+      const categoryId = `category-${index}`;
+      html += `<div id="${categoryId}" class="menu-category-section">`;
       html += `<h2>${group.name}</h2>`;
       group.items.forEach(item => {
         // Use the appropriate columns based on language
@@ -357,8 +375,66 @@
           </div>
         `;
       });
+      html += `</div>`;
     });
     menuDiv.innerHTML = html;
+
+    // Add click event listeners to category buttons
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const categoryId = this.getAttribute('data-category');
+        scrollToCategory(categoryId);
+      });
+    });
+
+    // Initialize intersection observer for active category highlighting
+    initializeCategoryObserver();
+  }
+
+  function scrollToCategory(categoryId) {
+    const element = document.getElementById(categoryId);
+    if (element) {
+      const headerHeight = document.querySelector('header').offsetHeight;
+      const navHeight = document.querySelector('.category-nav-container').offsetHeight;
+      const offset = headerHeight + navHeight + 20;
+      
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+      
+      // Adjust scroll position to account for fixed header and nav
+      window.scrollBy(0, -offset);
+    }
+  }
+
+  function initializeCategoryObserver() {
+    const categorySections = document.querySelectorAll('.menu-category-section');
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Remove active class from all buttons
+          categoryBtns.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to corresponding button
+          const categoryId = entry.target.id;
+          const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
+          if (activeBtn) {
+            activeBtn.classList.add('active');
+          }
+        }
+      });
+    }, {
+      threshold: 0.3,
+      rootMargin: '-100px 0px -50% 0px'
+    });
+    
+    categorySections.forEach(section => {
+      observer.observe(section);
+    });
   }
 
   fetch(SHEET_URL)

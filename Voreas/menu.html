@@ -413,70 +413,68 @@
   }
 
   function initializeCategoryObserver() {
-    const categorySections = document.querySelectorAll('.menu-category-section');
+    const categoryHeadings = document.querySelectorAll('.menu-category-section h2');
     const categoryBtns = document.querySelectorAll('.category-btn');
     
     const observer = new IntersectionObserver((entries) => {
-      let highestVisibleSection = null;
-      let highestRatio = 0;
-      
       entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio > highestRatio) {
-          highestRatio = entry.intersectionRatio;
-          highestVisibleSection = entry.target;
+        if (entry.isIntersecting) {
+          // Remove active class from all buttons
+          categoryBtns.forEach(btn => btn.classList.remove('active'));
+          
+          // Find the parent section and get its ID
+          const section = entry.target.closest('.menu-category-section');
+          if (section) {
+            const categoryId = section.id;
+            const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
+            if (activeBtn) {
+              activeBtn.classList.add('active');
+            }
+          }
         }
       });
-      
-      if (highestVisibleSection) {
-        // Remove active class from all buttons
-        categoryBtns.forEach(btn => btn.classList.remove('active'));
-        
-        // Add active class to corresponding button
-        const categoryId = highestVisibleSection.id;
-        const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
-        if (activeBtn) {
-          activeBtn.classList.add('active');
-        }
-      }
     }, {
-      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
-      rootMargin: '-80px 0px -60% 0px'
+      threshold: 0.5,
+      rootMargin: '-100px 0px -70% 0px'
     });
     
-    categorySections.forEach(section => {
-      observer.observe(section);
+    categoryHeadings.forEach(heading => {
+      observer.observe(heading);
     });
   }
 
   function updateActiveCategoryOnScroll() {
-    const categorySections = document.querySelectorAll('.menu-category-section');
+    const categoryHeadings = document.querySelectorAll('.menu-category-section h2');
     const categoryBtns = document.querySelectorAll('.category-btn');
     const headerHeight = document.querySelector('header').offsetHeight;
     const navHeight = document.querySelector('.category-nav-container').offsetHeight;
-    const offset = headerHeight + navHeight + 50;
+    const offset = headerHeight + navHeight + 30;
     
-    let activeSection = null;
+    let activeHeading = null;
     let minDistance = Infinity;
     
-    categorySections.forEach(section => {
-      const rect = section.getBoundingClientRect();
+    categoryHeadings.forEach(heading => {
+      const rect = heading.getBoundingClientRect();
       const distance = Math.abs(rect.top - offset);
       
-      if (distance < minDistance) {
+      if (distance < minDistance && rect.top <= offset + 50) {
         minDistance = distance;
-        activeSection = section;
+        activeHeading = heading;
       }
     });
     
-    if (activeSection) {
+    if (activeHeading) {
       // Remove active class from all buttons
       categoryBtns.forEach(btn => btn.classList.remove('active'));
       
-      // Add active class to corresponding button
-      const categoryId = activeSection.id;
-      const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
-      if (activeBtn) {
-        activeBtn.classList.add('active');
+      // Find the parent section and get its ID
+      const section = activeHeading.closest('.menu-category-section');
+      if (section) {
+        const categoryId = section.id;
+        const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
+        if (activeBtn) {
+          activeBtn.classList.add('active');
+        }
       }
     }
   }

@@ -630,7 +630,7 @@ nav {
   background: #fff;
   border-bottom: 1px solid #e0e0e0;
   position: sticky;
-  top: 0;
+  top: 80px; /* Account for header height */
   z-index: 100;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -1849,7 +1849,7 @@ footer {
   }
   
   .category-nav-container {
-    top: 0;
+    top: 120px; /* Account for mobile header height */
   }
   
   .category-nav {

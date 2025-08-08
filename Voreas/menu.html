@@ -390,6 +390,9 @@
 
     // Initialize intersection observer for active category highlighting
     initializeCategoryObserver();
+    
+    // Also add scroll event listener as fallback
+    window.addEventListener('scroll', updateActiveCategoryOnScroll);
   }
 
   function scrollToCategory(categoryId) {
@@ -414,27 +417,68 @@
     const categoryBtns = document.querySelectorAll('.category-btn');
     
     const observer = new IntersectionObserver((entries) => {
+      let highestVisibleSection = null;
+      let highestRatio = 0;
+      
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Remove active class from all buttons
-          categoryBtns.forEach(btn => btn.classList.remove('active'));
-          
-          // Add active class to corresponding button
-          const categoryId = entry.target.id;
-          const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
-          if (activeBtn) {
-            activeBtn.classList.add('active');
-          }
+        if (entry.isIntersecting && entry.intersectionRatio > highestRatio) {
+          highestRatio = entry.intersectionRatio;
+          highestVisibleSection = entry.target;
         }
       });
+      
+      if (highestVisibleSection) {
+        // Remove active class from all buttons
+        categoryBtns.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to corresponding button
+        const categoryId = highestVisibleSection.id;
+        const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
+        if (activeBtn) {
+          activeBtn.classList.add('active');
+        }
+      }
     }, {
-      threshold: 0.3,
-      rootMargin: '-100px 0px -50% 0px'
+      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+      rootMargin: '-80px 0px -60% 0px'
     });
     
     categorySections.forEach(section => {
       observer.observe(section);
     });
+  }
+
+  function updateActiveCategoryOnScroll() {
+    const categorySections = document.querySelectorAll('.menu-category-section');
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const headerHeight = document.querySelector('header').offsetHeight;
+    const navHeight = document.querySelector('.category-nav-container').offsetHeight;
+    const offset = headerHeight + navHeight + 50;
+    
+    let activeSection = null;
+    let minDistance = Infinity;
+    
+    categorySections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      const distance = Math.abs(rect.top - offset);
+      
+      if (distance < minDistance) {
+        minDistance = distance;
+        activeSection = section;
+      }
+    });
+    
+    if (activeSection) {
+      // Remove active class from all buttons
+      categoryBtns.forEach(btn => btn.classList.remove('active'));
+      
+      // Add active class to corresponding button
+      const categoryId = activeSection.id;
+      const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
+      if (activeBtn) {
+        activeBtn.classList.add('active');
+      }
+    }
   }
 
   fetch(SHEET_URL)

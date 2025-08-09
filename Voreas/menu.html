@@ -407,6 +407,9 @@
       const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
       if (activeBtn) {
         activeBtn.classList.add('active');
+        
+        // Scroll the category navigation to make the active button visible
+        scrollCategoryIntoView(activeBtn);
       }
       
       const headerHeight = document.querySelector('header').offsetHeight;
@@ -423,6 +426,24 @@
     }
   }
 
+  // Function to scroll category navigation to keep active button visible
+  function scrollCategoryIntoView(activeButton) {
+    const categoryNav = document.getElementById('categoryNav');
+    const buttonRect = activeButton.getBoundingClientRect();
+    const navRect = categoryNav.getBoundingClientRect();
+    
+    // Check if button is outside the visible area
+    if (buttonRect.left < navRect.left || buttonRect.right > navRect.right) {
+      // Calculate scroll position to center the active button
+      const scrollLeft = activeButton.offsetLeft - (navRect.width / 2) + (buttonRect.width / 2);
+      
+      categoryNav.scrollTo({
+        left: scrollLeft,
+        behavior: 'smooth'
+      });
+    }
+  }
+
   function initializeCategoryObserver() {
     const categoryHeadings = document.querySelectorAll('.menu-category-section h2');
     const categoryBtns = document.querySelectorAll('.category-btn');
@@ -430,16 +451,21 @@
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Remove active class from all buttons
-          categoryBtns.forEach(btn => btn.classList.remove('active'));
-          
           // Find the parent section and get its ID
           const section = entry.target.closest('.menu-category-section');
           if (section) {
             const categoryId = section.id;
             const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
-            if (activeBtn) {
+            
+            if (activeBtn && !activeBtn.classList.contains('active')) {
+              // Remove active class from all buttons
+              categoryBtns.forEach(btn => btn.classList.remove('active'));
+              
+              // Add active class to the new active button
               activeBtn.classList.add('active');
+              
+              // Scroll the category navigation to make the active button visible
+              scrollCategoryIntoView(activeBtn);
             }
           }
         }
@@ -475,20 +501,36 @@
     });
     
     if (activeHeading) {
-      // Remove active class from all buttons
-      categoryBtns.forEach(btn => btn.classList.remove('active'));
-      
       // Find the parent section and get its ID
       const section = activeHeading.closest('.menu-category-section');
       if (section) {
         const categoryId = section.id;
         const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
-        if (activeBtn) {
+        
+        if (activeBtn && !activeBtn.classList.contains('active')) {
+          // Remove active class from all buttons
+          categoryBtns.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to the new active button
           activeBtn.classList.add('active');
+          
+          // Scroll the category navigation to make the active button visible
+          scrollCategoryIntoView(activeBtn);
         }
       }
     }
   }
+
+  // Add scroll event listener for more responsive category detection
+  window.addEventListener('scroll', () => {
+    // Throttle the scroll event for better performance
+    if (!window.scrollTimeout) {
+      window.scrollTimeout = setTimeout(() => {
+        updateActiveCategoryOnScroll();
+        window.scrollTimeout = null;
+      }, 50);
+    }
+  });
 
   fetch(SHEET_URL)
     .then(response => response.text())

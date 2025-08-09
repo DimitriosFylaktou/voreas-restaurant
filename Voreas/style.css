@@ -633,6 +633,9 @@ nav {
   top: 80px; /* Account for header height */
   z-index: 100;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Ensure sticky behavior works properly */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .category-nav {
@@ -642,6 +645,10 @@ nav {
   gap: 1rem;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
+  /* Smooth scrolling for category navigation */
+  scroll-behavior: smooth;
+  /* Ensure proper scrolling on all devices */
+  -webkit-overflow-scrolling: touch;
 }
 
 .category-nav::-webkit-scrollbar {

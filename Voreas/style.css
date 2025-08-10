@@ -712,24 +712,24 @@ nav {
   display: none; /* Chrome, Safari, Opera */
 }
 
-.category-btn {
-  background: #f8f9fa;
-  border: 2px solid #e9ecef;
-  color: #495057;
-  padding: 0.75rem 1.5rem;
-  border-radius: 2rem;
-  font-family: 'Noto Sans', 'Open Sans', sans-serif;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  flex-shrink: 0;
-  /* Ensure proper button sizing */
-  min-width: max-content;
-  /* Better focus visibility */
-  outline: none;
-}
+  .category-btn {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    color: #495057;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    font-family: 'Noto Sans', 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    /* Ensure proper button sizing */
+    min-width: max-content;
+    /* Better focus visibility */
+    outline: none;
+  }
 
 .category-btn:hover {
   background: #e9ecef;
@@ -2035,7 +2035,7 @@ footer {
   
   .category-btn {
     padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     /* Add scroll snap for better mobile experience */
     scroll-snap-align: start;
   }
@@ -2529,7 +2529,7 @@ footer {
   
   .category-btn {
     padding: 0.5rem 1rem;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     /* Ensure minimum touch target size */
     min-height: 44px;
     /* Better text handling for long category names */

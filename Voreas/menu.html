@@ -321,6 +321,30 @@
     });
 }
 
+  // Enhanced function to ensure first category is active by default
+  function setDefaultActiveCategory() {
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    if (categoryBtns.length > 0) {
+      // Set the first category as active by default
+      categoryBtns[0].classList.add('active');
+      
+      // Scroll to make it visible
+      scrollCategoryIntoView(categoryBtns[0]);
+    }
+  }
+
+  // Function to handle window resize and ensure active category is visible
+  function handleWindowResize() {
+    const activeBtn = document.querySelector('.category-btn.active');
+    if (activeBtn) {
+      // Ensure active button is visible after resize
+      setTimeout(() => {
+        scrollCategoryIntoView(activeBtn);
+      }, 100);
+    }
+  }
+
+  // Enhanced renderMenu function with better category handling
   function renderMenu(items) {
     const menuDiv = document.getElementById('dynamic-menu');
     const categoryNav = document.getElementById('categoryNav');
@@ -391,10 +415,19 @@
     // Initialize intersection observer for active category highlighting
     initializeCategoryObserver();
     
+    // Set default active category after a short delay to ensure DOM is ready
+    setTimeout(() => {
+      setDefaultActiveCategory();
+    }, 100);
+    
     // Also add scroll event listener as fallback
     window.addEventListener('scroll', updateActiveCategoryOnScroll);
+    
+    // Add window resize listener to handle responsive behavior
+    window.addEventListener('resize', handleWindowResize);
   }
 
+  // Enhanced scrollToCategory function with better visibility
   function scrollToCategory(categoryId) {
     const element = document.getElementById(categoryId);
     const categoryBtns = document.querySelectorAll('.category-btn');
@@ -437,8 +470,12 @@
       // Calculate scroll position to center the active button
       const scrollLeft = activeButton.offsetLeft - (navRect.width / 2) + (buttonRect.width / 2);
       
+      // Ensure we don't scroll beyond the boundaries
+      const maxScrollLeft = categoryNav.scrollWidth - categoryNav.clientWidth;
+      const finalScrollLeft = Math.max(0, Math.min(scrollLeft, maxScrollLeft));
+      
       categoryNav.scrollTo({
-        left: scrollLeft,
+        left: finalScrollLeft,
         behavior: 'smooth'
       });
     }
@@ -471,8 +508,8 @@
         }
       });
     }, {
-      threshold: 0.5,
-      rootMargin: '-100px 0px -70% 0px'
+      threshold: 0.3, // Reduced threshold for better detection
+      rootMargin: '-80px 0px -60% 0px' // Adjusted margins for better positioning
     });
     
     categoryHeadings.forEach(heading => {
@@ -485,7 +522,7 @@
     const categoryBtns = document.querySelectorAll('.category-btn');
     const headerHeight = document.querySelector('header').offsetHeight;
     const navHeight = document.querySelector('.category-nav-container').offsetHeight;
-    const offset = headerHeight + navHeight + 30;
+    const offset = headerHeight + navHeight + 20;
     
     let activeHeading = null;
     let minDistance = Infinity;

@@ -702,6 +702,10 @@ nav {
   scroll-behavior: smooth;
   /* Ensure proper scrolling on all devices */
   -webkit-overflow-scrolling: touch;
+  /* Ensure proper flex behavior */
+  align-items: center;
+  /* Prevent wrapping */
+  flex-wrap: nowrap;
 }
 
 .category-nav::-webkit-scrollbar {
@@ -721,6 +725,10 @@ nav {
   transition: all 0.3s ease;
   white-space: nowrap;
   flex-shrink: 0;
+  /* Ensure proper button sizing */
+  min-width: max-content;
+  /* Better focus visibility */
+  outline: none;
 }
 
 .category-btn:hover {
@@ -728,6 +736,7 @@ nav {
   border-color: #dee2e6;
   color: #212529;
   transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .category-btn.active {
@@ -735,6 +744,35 @@ nav {
   border-color: #d4c9a8;
   color: #000000;
   box-shadow: 0 2px 8px rgba(231, 222, 190, 0.3);
+  /* Enhanced active state visibility */
+  transform: translateY(-1px);
+  font-weight: 700;
+  /* Ensure active button is always visible */
+  position: relative;
+  z-index: 2;
+}
+
+.category-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 3px;
+  background: #d4c9a8;
+  border-radius: 2px;
+}
+
+/* Ensure smooth scrolling behavior */
+.category-nav:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced focus states for accessibility */
+.category-btn:focus {
+  outline: 2px solid #E7DEBE;
+  outline-offset: 2px;
 }
 
 .menu-category-section {
@@ -1991,11 +2029,39 @@ footer {
   .category-nav {
     padding: 0.8rem 1rem;
     gap: 0.8rem;
+    /* Ensure proper scrolling on mobile */
+    scroll-snap-type: x mandatory;
   }
   
   .category-btn {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
+    /* Add scroll snap for better mobile experience */
+    scroll-snap-align: start;
+  }
+  
+  /* Enhanced mobile active state */
+  .category-btn.active {
+    background: #E7DEBE;
+    border-color: #d4c9a8;
+    color: #000000;
+    box-shadow: 0 2px 8px rgba(231, 222, 190, 0.3);
+    transform: translateY(-1px);
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .category-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 3px;
+    background: #d4c9a8;
+    border-radius: 2px;
   }
   .menu-section {
     padding: 1rem;
@@ -2446,6 +2512,65 @@ footer {
 }
 
 .welcome-section-single .daily-dishes-link:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Additional improvements for very small screens */
+@media (max-width: 480px) {
+  .category-nav-container {
+    top: 100px; /* Adjust for smaller mobile header */
+  }
+  
+  .category-nav {
+    padding: 0.6rem 0.8rem;
+    gap: 0.6rem;
+  }
+  
+  .category-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    /* Ensure minimum touch target size */
+    min-height: 44px;
+    /* Better text handling for long category names */
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  /* Enhanced active state for small screens */
+  .category-btn.active {
+    background: #E7DEBE;
+    border-color: #d4c9a8;
+    color: #000000;
+    box-shadow: 0 2px 8px rgba(231, 222, 190, 0.4);
+    transform: translateY(-1px);
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .category-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 4px;
+    background: #d4c9a8;
+    border-radius: 2px;
+  }
+}
+
+/* Ensure smooth scrolling behavior across all devices */
+.category-nav {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better focus management for accessibility */
+.category-btn:focus-visible {
+  outline: 2px solid #E7DEBE;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(231, 222, 190, 0.3);
 } 

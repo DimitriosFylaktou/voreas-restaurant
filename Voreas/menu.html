@@ -488,90 +488,66 @@
   }
 
   function initializeCategoryObserver() {
-    const categoryHeadings = document.querySelectorAll('.menu-category-section h2');
-    const categoryBtns = document.querySelectorAll('.category-btn');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Find the parent section and get its ID
-          const section = entry.target.closest('.menu-category-section');
-          if (section) {
-            const categoryId = section.id;
-            const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
-            
-            if (activeBtn && !activeBtn.classList.contains('active')) {
-              // Remove active class from all buttons
-              categoryBtns.forEach(btn => btn.classList.remove('active'));
-              
-              // Add active class to the new active button
-              activeBtn.classList.add('active');
-              
-              // Scroll the category navigation to make the active button visible
-              scrollCategoryIntoView(activeBtn);
-            }
-          }
-        }
-      });
-    }, {
-      threshold: 0.3, // Reduced threshold for better detection
-      rootMargin: '-110px 0px -60% 0px' // Adjusted for consistent offset (header + nav + 30px)
-    });
-    
-    categoryHeadings.forEach(heading => {
-      observer.observe(heading);
-    });
+    // This function is now simplified - we'll use the scroll event for precise control
+    // Just set up the initial active category
+    setDefaultActiveCategory();
   }
 
   function updateActiveCategoryOnScroll() {
-    const categoryHeadings = document.querySelectorAll('.menu-category-section h2');
+    const categorySections = document.querySelectorAll('.menu-category-section');
     const categoryBtns = document.querySelectorAll('.category-btn');
+    
+    // Calculate the sticky header offset (where content becomes visible)
     const headerHeight = document.querySelector('header').offsetHeight;
     const navHeight = document.querySelector('.category-nav-container').offsetHeight;
-    const offset = headerHeight + navHeight + 30; // Consistent with scrollToCategory function
+    const stickyOffset = headerHeight + navHeight;
     
-    let activeHeading = null;
-    let minDistance = Infinity;
+    // Find which category section is currently at the top of the visible area
+    let activeSection = null;
     
-    categoryHeadings.forEach(heading => {
-      const rect = heading.getBoundingClientRect();
-      const distance = Math.abs(rect.top - offset);
-      
-      if (distance < minDistance && rect.top <= offset + 50) {
-        minDistance = distance;
-        activeHeading = heading;
-      }
-    });
-    
-    if (activeHeading) {
-      // Find the parent section and get its ID
-      const section = activeHeading.closest('.menu-category-section');
-      if (section) {
-        const categoryId = section.id;
-        const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
+    // Special handling for when we're at the very top of the page
+    if (window.pageYOffset <= stickyOffset) {
+      // We're at the top, so the first section should be active
+      activeSection = categorySections[0];
+    } else {
+      // Find which section has passed the sticky header
+      categorySections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const sectionTop = rect.top;
         
-        if (activeBtn && !activeBtn.classList.contains('active')) {
-          // Remove active class from all buttons
-          categoryBtns.forEach(btn => btn.classList.remove('active'));
-          
-          // Add active class to the new active button
-          activeBtn.classList.add('active');
-          
-          // Scroll the category navigation to make the active button visible
-          scrollCategoryIntoView(activeBtn);
+        // Check if this section's top edge has passed the sticky header
+        // We want to activate when the section top is just below the sticky header
+        if (sectionTop <= stickyOffset + 5) { // 5px tolerance for smooth transitions
+          activeSection = section;
         }
+      });
+    }
+    
+    if (activeSection) {
+      const categoryId = activeSection.id;
+      const activeBtn = document.querySelector(`[data-category="${categoryId}"]`);
+      
+      if (activeBtn && !activeBtn.classList.contains('active')) {
+        // Remove active class from all buttons
+        categoryBtns.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to the new active button
+        activeBtn.classList.add('active');
+        
+        // Scroll the category navigation to make the active button visible
+        scrollCategoryIntoView(activeBtn);
       }
     }
   }
 
-  // Add scroll event listener for more responsive category detection
+  // Add scroll event listener for precise category detection
   window.addEventListener('scroll', () => {
     // Throttle the scroll event for better performance
     if (!window.scrollTimeout) {
       window.scrollTimeout = setTimeout(() => {
         updateActiveCategoryOnScroll();
         window.scrollTimeout = null;
-      }, 50);
+      }, 16); // ~60fps for smooth responsiveness
     }
   });
 

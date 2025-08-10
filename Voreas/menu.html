@@ -427,7 +427,7 @@
     window.addEventListener('resize', handleWindowResize);
   }
 
-  // Enhanced scrollToCategory function with better visibility
+  // Enhanced scrollToCategory function with proper offset for sticky header
   function scrollToCategory(categoryId) {
     const element = document.getElementById(categoryId);
     const categoryBtns = document.querySelectorAll('.category-btn');
@@ -445,17 +445,23 @@
         scrollCategoryIntoView(activeBtn);
       }
       
+      // Calculate proper offset for sticky header and category navigation
       const headerHeight = document.querySelector('header').offsetHeight;
       const navHeight = document.querySelector('.category-nav-container').offsetHeight;
-      const offset = headerHeight + navHeight + 20;
+      const offset = headerHeight + navHeight + 30; // Added extra padding for better visibility
       
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+      // Get the element's position relative to the viewport
+      const elementRect = element.getBoundingClientRect();
+      const elementTop = elementRect.top + window.pageYOffset;
+      
+      // Calculate the target scroll position with proper offset
+      const targetScrollTop = elementTop - offset;
+      
+      // Smooth scroll to the target position
+      window.scrollTo({
+        top: targetScrollTop,
+        behavior: 'smooth'
       });
-      
-      // Adjust scroll position to account for fixed header and nav
-      window.scrollBy(0, -offset);
     }
   }
 
@@ -509,7 +515,7 @@
       });
     }, {
       threshold: 0.3, // Reduced threshold for better detection
-      rootMargin: '-80px 0px -60% 0px' // Adjusted margins for better positioning
+      rootMargin: '-110px 0px -60% 0px' // Adjusted for consistent offset (header + nav + 30px)
     });
     
     categoryHeadings.forEach(heading => {
@@ -522,7 +528,7 @@
     const categoryBtns = document.querySelectorAll('.category-btn');
     const headerHeight = document.querySelector('header').offsetHeight;
     const navHeight = document.querySelector('.category-nav-container').offsetHeight;
-    const offset = headerHeight + navHeight + 20;
+    const offset = headerHeight + navHeight + 30; // Consistent with scrollToCategory function
     
     let activeHeading = null;
     let minDistance = Infinity;

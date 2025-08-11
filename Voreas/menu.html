@@ -445,6 +445,9 @@
         scrollCategoryIntoView(activeBtn);
       }
       
+      // Temporarily disable scroll-based active category updates
+      window.scrollBasedUpdatesDisabled = true;
+      
       // Calculate proper offset for sticky header and category navigation
       const headerHeight = document.querySelector('header').offsetHeight;
       const navHeight = document.querySelector('.category-nav-container').offsetHeight;
@@ -462,6 +465,11 @@
         top: targetScrollTop,
         behavior: 'smooth'
       });
+      
+      // Re-enable scroll-based updates after scroll animation completes
+      setTimeout(() => {
+        window.scrollBasedUpdatesDisabled = false;
+      }, 1000); // Wait for scroll animation to complete
     }
   }
 
@@ -494,6 +502,11 @@
   }
 
   function updateActiveCategoryOnScroll() {
+    // Skip updates if scroll-based updates are temporarily disabled
+    if (window.scrollBasedUpdatesDisabled) {
+      return;
+    }
+    
     const categorySections = document.querySelectorAll('.menu-category-section');
     const categoryBtns = document.querySelectorAll('.category-btn');
     

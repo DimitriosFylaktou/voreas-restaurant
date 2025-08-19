@@ -368,32 +368,59 @@
     const today = new Date();
     const currentWeekday = today.getDay();
     
-    // Map weekday numbers to day names for comparison
+    // Map weekday numbers to day names for comparison (multiple formats)
     const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const currentDayName = weekdays[currentWeekday];
+    
+    // Create multiple day name formats for flexible matching
+    const dayFormats = [
+      currentDayName,                    // "Tuesday"
+      currentDayName.toLowerCase(),       // "tuesday"
+      currentDayName.substring(0, 3),    // "Tue"
+      currentDayName.substring(0, 3).toLowerCase() // "tue"
+    ];
+    
+    console.log('Current day formats to match:', dayFormats);
 
     // Group items by normalized category with Dish of the Day filtering
     const grouped = {};
+    
+    // Debug: Log current day and items for troubleshooting
+    console.log('Current day:', currentDayName);
+    console.log('All items:', items);
+    
     items.forEach(item => {
       if (item.Available && item.Available.trim().toLowerCase() === 'true') {
         // Use the appropriate category column based on language
         const rawCategory = item[categoryColumn] || item.Category || '';
         const category = rawCategory.trim().toLowerCase();
         
+        // Debug: Log each item's category and day info
+        console.log('Item:', item[dishNameColumn] || item['Dish Name'], 'Category:', rawCategory, 'Day:', item.Day);
+        
         // Check if this is a "Dish of the Day" item (has a Day column value)
         if (item.Day && item.Day.trim() !== '') {
-          // Only include if it matches today's weekday
-          if (item.Day.trim() === currentDayName) {
+          const itemDay = item.Day.trim();
+          const dayMatches = dayFormats.some(format => format === itemDay);
+          console.log('Found item with Day column:', itemDay, 'Current day formats:', dayFormats, 'Match:', dayMatches);
+          
+          // Only include if it matches today's weekday (any format)
+          if (dayMatches) {
             if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
             grouped[category].items.push(item);
+            console.log('Added to grouped:', category);
           }
         } else {
           // Regular category item (no Day column) - always include
           if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
           grouped[category].items.push(item);
+          console.log('Added regular item to:', category);
         }
       }
     });
+    
+    // Debug: Log final grouped result
+    console.log('Final grouped categories:', grouped);
 
     // Filter out empty categories and sort by their first appearance
     const orderedCategories = Object.values(grouped).filter(group => group.items.length > 0);

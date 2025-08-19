@@ -350,7 +350,7 @@
     }
   }
 
-  // Enhanced renderMenu function with better category handling
+  // Enhanced renderMenu function with better category handling and Dish of the Day logic
   function renderMenu(items) {
     const menuDiv = document.getElementById('dynamic-menu');
     const categoryNav = document.getElementById('categoryNav');
@@ -364,22 +364,41 @@
     const descriptionColumn = currentLang === 'gr' ? 'Description GR' : 'Description';
     const categoryColumn = currentLang === 'gr' ? 'Category GR' : 'Category';
 
-    // Group items by normalized category
+    // Get current weekday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+    const today = new Date();
+    const currentWeekday = today.getDay();
+    
+    // Map weekday numbers to day names for comparison
+    const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const currentDayName = weekdays[currentWeekday];
+
+    // Group items by normalized category with Dish of the Day filtering
     const grouped = {};
     items.forEach(item => {
       if (item.Available && item.Available.trim().toLowerCase() === 'true') {
         // Use the appropriate category column based on language
         const rawCategory = item[categoryColumn] || item.Category || '';
         const category = rawCategory.trim().toLowerCase();
-        if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
-        grouped[category].items.push(item);
+        
+        // Check if this is a "Dish of the Day" item (has a Day column value)
+        if (item.Day && item.Day.trim() !== '') {
+          // Only include if it matches today's weekday
+          if (item.Day.trim() === currentDayName) {
+            if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
+            grouped[category].items.push(item);
+          }
+        } else {
+          // Regular category item (no Day column) - always include
+          if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
+          grouped[category].items.push(item);
+        }
       }
     });
 
-    // Sort categories by their first appearance
-    const orderedCategories = Object.values(grouped);
+    // Filter out empty categories and sort by their first appearance
+    const orderedCategories = Object.values(grouped).filter(group => group.items.length > 0);
 
-    // Build category navigation
+    // Build category navigation (only for categories with items)
     let navHtml = '';
     orderedCategories.forEach((group, index) => {
       const categoryId = `category-${index}`;

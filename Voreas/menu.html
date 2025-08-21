@@ -385,9 +385,17 @@
     // Group items by normalized category with Dish of the Day filtering
     const grouped = {};
     
-    // Debug: Log current day and items for troubleshooting
-    console.log('Current day:', currentDayName);
-    console.log('All items:', items);
+         // Debug: Log current day and items for troubleshooting
+     console.log('Current day:', currentDayName);
+     console.log('All items:', items);
+     
+     // Debug: Check for any items with "Dishes of the Day" category
+     const dishesOfDayItems = items.filter(item => {
+       const rawCategory = item[categoryColumn] || item.Category || '';
+       return rawCategory.toLowerCase().includes('dishes of the day') || 
+              rawCategory.toLowerCase().includes('cooked meals');
+     });
+     console.log('Items with "Dishes of the Day" category:', dishesOfDayItems);
     
     items.forEach(item => {
       if (item.Available && item.Available.trim().toLowerCase() === 'true') {
@@ -463,14 +471,37 @@
     // Debug: Log final grouped result
     console.log('Final grouped categories:', grouped);
 
-    // Filter out empty categories and sort by their first appearance
-    const orderedCategories = Object.values(grouped).filter(group => group.items.length > 0);
+    // Keep all categories but mark empty ones for debugging
+    const orderedCategories = Object.values(grouped);
+    
+    // Debug: Log which categories have items and which are empty
+    orderedCategories.forEach(group => {
+      console.log(`Category "${group.name}": ${group.items.length} items`);
+      if (group.items.length === 0) {
+        console.log(`  - Category "${group.name}" is empty but will still be shown`);
+      }
+    });
+    
+    // Ensure "Dishes of the Day" category always appears, even if empty
+    const dishesOfDayCategory = "dishes of the day (cooked meals)";
+    const hasDishesOfDay = orderedCategories.some(group => 
+      group.name.toLowerCase() === dishesOfDayCategory
+    );
+    
+    if (!hasDishesOfDay) {
+      console.log('Adding empty "Dishes of the Day" category as fallback');
+      orderedCategories.unshift({
+        name: "Dishes of the Day (COOKED MEALS)",
+        items: []
+      });
+    }
 
-    // Build category navigation (only for categories with items)
+    // Build category navigation (show all categories)
     let navHtml = '';
     orderedCategories.forEach((group, index) => {
       const categoryId = `category-${index}`;
-      navHtml += `<button class="category-btn" data-category="${categoryId}">${group.name}</button>`;
+      const buttonText = group.items.length === 0 ? `${group.name} (No items today)` : group.name;
+      navHtml += `<button class="category-btn" data-category="${categoryId}">${buttonText}</button>`;
     });
     categoryNav.innerHTML = navHtml;
 

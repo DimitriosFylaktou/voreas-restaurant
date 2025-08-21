@@ -401,14 +401,55 @@
         // Check if this is a "Dish of the Day" item (has a Day column value)
         if (item.Day && item.Day.trim() !== '') {
           const itemDay = item.Day.trim();
-          const dayMatches = dayFormats.some(format => format === itemDay);
-          console.log('Found item with Day column:', itemDay, 'Current day formats:', dayFormats, 'Match:', dayMatches);
+          console.log('Item Day value:', itemDay, 'Type:', typeof itemDay);
           
-          // Only include if it matches today's weekday (any format)
-          if (dayMatches) {
-            if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
-            grouped[category].items.push(item);
-            console.log('Added to grouped:', category);
+          // Check if this is a special day indicator (like "first", "second", etc.)
+          if (itemDay.toLowerCase() === 'first' || itemDay.toLowerCase() === '1st') {
+            // For "first" day items, show them on the first day of the week (Monday)
+            if (currentDayName === 'Monday') {
+              if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
+              grouped[category].items.push(item);
+              console.log('Added "first" day item on Monday to:', category);
+            }
+          } else if (itemDay.toLowerCase() === 'second' || itemDay.toLowerCase() === '2nd') {
+            // For "second" day items, show them on Tuesday
+            if (currentDayName === 'Tuesday') {
+              if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
+              grouped[category].items.push(item);
+              console.log('Added "second" day item on Tuesday to:', category);
+            }
+          } else if (itemDay.toLowerCase() === 'third' || itemDay.toLowerCase() === '3rd') {
+            // For "third" day items, show them on Wednesday
+            if (currentDayName === 'Wednesday') {
+              if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
+              grouped[category].items.push(item);
+              console.log('Added "third" day item on Wednesday to:', category);
+            }
+          } else if (itemDay.toLowerCase() === 'fourth' || itemDay.toLowerCase() === '4th') {
+            // For "fourth" day items, show them on Thursday
+            if (currentDayName === 'Thursday') {
+              if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
+              grouped[category].items.push(item);
+              console.log('Added "fourth" day item on Thursday to:', category);
+            }
+          } else if (itemDay.toLowerCase() === 'fifth' || itemDay.toLowerCase() === '5th') {
+            // For "fifth" day items, show them on Friday
+            if (currentDayName === 'Friday') {
+              if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
+              grouped[category].items.push(item);
+              console.log('Added "fifth" day item on Friday to:', category);
+            }
+          } else {
+            // Try to match with weekday names
+            const dayMatches = dayFormats.some(format => format === itemDay);
+            console.log('Found item with Day column:', itemDay, 'Current day formats:', dayFormats, 'Match:', dayMatches);
+            
+            // Only include if it matches today's weekday (any format)
+            if (dayMatches) {
+              if (!grouped[category]) grouped[category] = { name: rawCategory.trim(), items: [] };
+              grouped[category].items.push(item);
+              console.log('Added to grouped:', category);
+            }
           }
         } else {
           // Regular category item (no Day column) - always include

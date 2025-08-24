@@ -285,9 +285,12 @@
   function translateCategoryName(categoryName) {
     const currentLang = localStorage.getItem('selectedLanguage') || 'en';
     
-    // Check if this is the "Dishes of the Day" category
+    // Check if this is the "Dishes of the Day" category (more flexible detection)
     if (categoryName.toLowerCase().includes('dishes of the day') || 
-        categoryName.toLowerCase().includes('cooked meals')) {
+        categoryName.toLowerCase().includes('cooked meals') ||
+        categoryName.toLowerCase().includes('dish of the day') ||
+        categoryName.toLowerCase().includes('daily') ||
+        categoryName.toLowerCase().includes('special')) {
       return translations[currentLang].cat_dishes_of_day;
     }
     
@@ -405,13 +408,28 @@
      console.log('Current day:', currentDayName);
      console.log('All items:', items);
      
-     // Debug: Check for any items with "Dishes of the Day" category
-     const dishesOfDayItems = items.filter(item => {
-       const rawCategory = item[categoryColumn] || item.Category || '';
-       return rawCategory.toLowerCase().includes('dishes of the day') || 
-              rawCategory.toLowerCase().includes('cooked meals');
-     });
-     console.log('Items with "Dishes of the Day" category:', dishesOfDayItems);
+         // Debug: Check for any items with "Dishes of the Day" category
+    const dishesOfDayItems = items.filter(item => {
+      const rawCategory = item[categoryColumn] || item.Category || '';
+      return rawCategory.toLowerCase().includes('dishes of the day') || 
+             rawCategory.toLowerCase().includes('cooked meals');
+    });
+    console.log('Items with "Dishes of the Day" category:', dishesOfDayItems);
+    
+    // Debug: Log all unique category names to see what we're working with
+    const allCategories = [...new Set(items.map(item => item[categoryColumn] || item.Category || '').filter(cat => cat.trim() !== ''))];
+    console.log('All unique category names from sheet:', allCategories);
+    
+    // Debug: Check each category name for "Dishes of the Day" patterns
+    allCategories.forEach(cat => {
+      const lowerCat = cat.toLowerCase();
+      const hasDishesOfDay = lowerCat.includes('dishes of the day') || 
+                              lowerCat.includes('cooked meals') ||
+                              lowerCat.includes('dish of the day') ||
+                              lowerCat.includes('daily') ||
+                              lowerCat.includes('special');
+      console.log(`Category "${cat}" - contains "Dishes of Day" pattern: ${hasDishesOfDay}`);
+    });
     
     items.forEach(item => {
       if (item.Available && item.Available.trim().toLowerCase() === 'true') {
@@ -488,12 +506,60 @@
     console.log('Final grouped categories:', grouped);
 
     // Only show categories that have items
-    const orderedCategories = Object.values(grouped).filter(group => group.items.length > 0);
+    let orderedCategories = Object.values(grouped).filter(group => group.items.length > 0);
     
-    // Debug: Log which categories have items
-    orderedCategories.forEach(group => {
-      console.log(`Category "${group.name}": ${group.items.length} items`);
+    // Reorder categories to put "Dishes of the Day" first
+    console.log('Before sorting - Categories:', orderedCategories.map(cat => cat.name));
+    
+    orderedCategories.sort((a, b) => {
+      // More flexible detection for "Dishes of the Day" category
+      const aIsDishesOfDay = a.name.toLowerCase().includes('dishes of the day') || 
+                              a.name.toLowerCase().includes('cooked meals') ||
+                              a.name.toLowerCase().includes('dish of the day') ||
+                              a.name.toLowerCase().includes('daily') ||
+                              a.name.toLowerCase().includes('special');
+      const bIsDishesOfDay = b.name.toLowerCase().includes('dishes of the day') || 
+                              b.name.toLowerCase().includes('cooked meals') ||
+                              b.name.toLowerCase().includes('dish of the day') ||
+                              b.name.toLowerCase().includes('daily') ||
+                              b.name.toLowerCase().includes('special');
+      
+      console.log(`Comparing: "${a.name}" (isDishesOfDay: ${aIsDishesOfDay}) vs "${b.name}" (isDishesOfDay: ${bIsDishesOfDay})`);
+      
+      if (aIsDishesOfDay && !bIsDishesOfDay) {
+        console.log(`Moving "${a.name}" to first position`);
+        return -1; // a comes first
+      }
+      if (!aIsDishesOfDay && bIsDishesOfDay) {
+        console.log(`Moving "${b.name}" to first position`);
+        return 1;  // b comes first
+      }
+      return 0; // keep original order for non-Dishes of Day categories
     });
+    
+    console.log('After sorting - Categories:', orderedCategories.map(cat => cat.name));
+    
+    // Debug: Log which categories have items and their order
+    orderedCategories.forEach((group, index) => {
+      console.log(`Category ${index + 1}: "${group.name}" - ${group.items.length} items`);
+    });
+    
+    // Fallback: If sorting didn't work, manually move "Dishes of the Day" to first position
+    const dishesOfDayIndex = orderedCategories.findIndex(group => {
+      const lowerName = group.name.toLowerCase();
+      return lowerName.includes('dishes of the day') || 
+             lowerName.includes('cooked meals') ||
+             lowerName.includes('dish of the day') ||
+             lowerName.includes('daily') ||
+             lowerName.includes('special');
+    });
+    
+    if (dishesOfDayIndex > 0) {
+      console.log(`Found "Dishes of the Day" at index ${dishesOfDayIndex}, moving to first position`);
+      const dishesOfDayGroup = orderedCategories.splice(dishesOfDayIndex, 1)[0];
+      orderedCategories.unshift(dishesOfDayGroup);
+      console.log('After fallback reordering:', orderedCategories.map(cat => cat.name));
+    }
     
 
 

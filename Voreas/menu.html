@@ -408,28 +408,48 @@
      console.log('Current day:', currentDayName);
      console.log('All items:', items);
      
-         // Debug: Check for any items with "Dishes of the Day" category
-    const dishesOfDayItems = items.filter(item => {
-      const rawCategory = item[categoryColumn] || item.Category || '';
-      return rawCategory.toLowerCase().includes('dishes of the day') || 
-             rawCategory.toLowerCase().includes('cooked meals');
-    });
-    console.log('Items with "Dishes of the Day" category:', dishesOfDayItems);
-    
-    // Debug: Log all unique category names to see what we're working with
-    const allCategories = [...new Set(items.map(item => item[categoryColumn] || item.Category || '').filter(cat => cat.trim() !== ''))];
-    console.log('All unique category names from sheet:', allCategories);
-    
-    // Debug: Check each category name for "Dishes of the Day" patterns
-    allCategories.forEach(cat => {
-      const lowerCat = cat.toLowerCase();
-      const hasDishesOfDay = lowerCat.includes('dishes of the day') || 
-                              lowerCat.includes('cooked meals') ||
-                              lowerCat.includes('dish of the day') ||
-                              lowerCat.includes('daily') ||
-                              lowerCat.includes('special');
-      console.log(`Category "${cat}" - contains "Dishes of Day" pattern: ${hasDishesOfDay}`);
-    });
+              // Debug: Check for any items with "Dishes of the Day" category (both languages)
+     const dishesOfDayItems = items.filter(item => {
+       const rawCategory = item[categoryColumn] || item.Category || '';
+       const rawCategoryGR = item['Category GR'] || '';
+       
+       // Check both English and Greek patterns
+       const isEnglishDishesOfDay = rawCategory.toLowerCase().includes('dishes of the day') || 
+                                    rawCategory.toLowerCase().includes('cooked meals');
+       const isGreekDishesOfDay = rawCategoryGR.toLowerCase().includes('πιάτα της ημέρας') || 
+                                  rawCategoryGR.toLowerCase().includes('μαγειρεμένα') ||
+                                  rawCategoryGR.toLowerCase().includes('ημέρας');
+       
+       return isEnglishDishesOfDay || isGreekDishesOfDay;
+     });
+     console.log('Items with "Dishes of the Day" category:', dishesOfDayItems);
+     
+     // Debug: Log all unique category names to see what we're working with
+     const allCategories = [...new Set(items.map(item => item[categoryColumn] || item.Category || '').filter(cat => cat.trim() !== ''))];
+     const allCategoriesGR = [...new Set(items.map(item => item['Category GR'] || '').filter(cat => cat.trim() !== ''))];
+     console.log('All unique category names from sheet (EN):', allCategories);
+     console.log('All unique category names from sheet (GR):', allCategoriesGR);
+     
+     // Debug: Check each category name for "Dishes of the Day" patterns (both languages)
+     allCategories.forEach(cat => {
+       const lowerCat = cat.toLowerCase();
+       const hasDishesOfDay = lowerCat.includes('dishes of the day') || 
+                               lowerCat.includes('cooked meals') ||
+                               lowerCat.includes('dish of the day') ||
+                               lowerCat.includes('daily') ||
+                               lowerCat.includes('special');
+       console.log(`Category "${cat}" (EN) - contains "Dishes of Day" pattern: ${hasDishesOfDay}`);
+     });
+     
+     allCategoriesGR.forEach(cat => {
+       const lowerCat = cat.toLowerCase();
+       const hasDishesOfDay = lowerCat.includes('πιάτα της ημέρας') || 
+                               lowerCat.includes('μαγειρεμένα') ||
+                               lowerCat.includes('ημέρας') ||
+                               lowerCat.includes('καθημερινά') ||
+                               lowerCat.includes('ειδικά');
+       console.log(`Category "${cat}" (GR) - contains "Dishes of Day" pattern: ${hasDishesOfDay}`);
+     });
     
     items.forEach(item => {
       if (item.Available && item.Available.trim().toLowerCase() === 'true') {
@@ -511,18 +531,28 @@
     // Reorder categories to put "Dishes of the Day" first
     console.log('Before sorting - Categories:', orderedCategories.map(cat => cat.name));
     
-    orderedCategories.sort((a, b) => {
-      // More flexible detection for "Dishes of the Day" category
-      const aIsDishesOfDay = a.name.toLowerCase().includes('dishes of the day') || 
-                              a.name.toLowerCase().includes('cooked meals') ||
-                              a.name.toLowerCase().includes('dish of the day') ||
-                              a.name.toLowerCase().includes('daily') ||
-                              a.name.toLowerCase().includes('special');
-      const bIsDishesOfDay = b.name.toLowerCase().includes('dishes of the day') || 
-                              b.name.toLowerCase().includes('cooked meals') ||
-                              b.name.toLowerCase().includes('dish of the day') ||
-                              b.name.toLowerCase().includes('daily') ||
-                              b.name.toLowerCase().includes('special');
+         orderedCategories.sort((a, b) => {
+       // More flexible detection for "Dishes of the Day" category (both languages)
+       const aIsDishesOfDay = a.name.toLowerCase().includes('dishes of the day') || 
+                               a.name.toLowerCase().includes('cooked meals') ||
+                               a.name.toLowerCase().includes('dish of the day') ||
+                               a.name.toLowerCase().includes('daily') ||
+                               a.name.toLowerCase().includes('special') ||
+                               a.name.toLowerCase().includes('πιάτα της ημέρας') ||
+                               a.name.toLowerCase().includes('μαγειρεμένα') ||
+                               a.name.toLowerCase().includes('ημέρας') ||
+                               a.name.toLowerCase().includes('καθημερινά') ||
+                               a.name.toLowerCase().includes('ειδικά');
+       const bIsDishesOfDay = b.name.toLowerCase().includes('dishes of the day') || 
+                               b.name.toLowerCase().includes('cooked meals') ||
+                               b.name.toLowerCase().includes('dish of the day') ||
+                               b.name.toLowerCase().includes('daily') ||
+                               b.name.toLowerCase().includes('special') ||
+                               b.name.toLowerCase().includes('πιάτα της ημέρας') ||
+                               b.name.toLowerCase().includes('μαγειρεμένα') ||
+                               b.name.toLowerCase().includes('ημέρας') ||
+                               b.name.toLowerCase().includes('καθημερινά') ||
+                               b.name.toLowerCase().includes('ειδικά');
       
       console.log(`Comparing: "${a.name}" (isDishesOfDay: ${aIsDishesOfDay}) vs "${b.name}" (isDishesOfDay: ${bIsDishesOfDay})`);
       
@@ -544,15 +574,20 @@
       console.log(`Category ${index + 1}: "${group.name}" - ${group.items.length} items`);
     });
     
-    // Fallback: If sorting didn't work, manually move "Dishes of the Day" to first position
-    const dishesOfDayIndex = orderedCategories.findIndex(group => {
-      const lowerName = group.name.toLowerCase();
-      return lowerName.includes('dishes of the day') || 
-             lowerName.includes('cooked meals') ||
-             lowerName.includes('dish of the day') ||
-             lowerName.includes('daily') ||
-             lowerName.includes('special');
-    });
+         // Fallback: If sorting didn't work, manually move "Dishes of the Day" to first position
+     const dishesOfDayIndex = orderedCategories.findIndex(group => {
+       const lowerName = group.name.toLowerCase();
+       return lowerName.includes('dishes of the day') || 
+              lowerName.includes('cooked meals') ||
+              lowerName.includes('dish of the day') ||
+              lowerName.includes('daily') ||
+              lowerName.includes('special') ||
+              lowerName.includes('πιάτα της ημέρας') ||
+              lowerName.includes('μαγειρεμένα') ||
+              lowerName.includes('ημέρας') ||
+              lowerName.includes('καθημερινά') ||
+              lowerName.includes('ειδικά');
+     });
     
     if (dishesOfDayIndex > 0) {
       console.log(`Found "Dishes of the Day" at index ${dishesOfDayIndex}, moving to first position`);
@@ -567,18 +602,26 @@
     
     // Look for any category that might be the "Dishes of the Day" category
     // We'll check multiple possible variations
-    const possibleDishesOfDayNames = [
-      'dishes of the day',
-      'cooked meals', 
-      'dish of the day',
-      'daily',
-      'special',
-      'today',
-      'of the day',
-      'daily specials',
-      'chef specials',
-      'daily menu'
-    ];
+         const possibleDishesOfDayNames = [
+       'dishes of the day',
+       'cooked meals', 
+       'dish of the day',
+       'daily',
+       'special',
+       'today',
+       'of the day',
+       'daily specials',
+       'chef specials',
+       'daily menu',
+       // Greek patterns
+       'πιάτα της ημέρας',
+       'μαγειρεμένα',
+       'ημέρας',
+       'καθημερινά',
+       'ειδικά',
+       'καθημερινό',
+       'ειδικό'
+     ];
     
     let foundDishesOfDay = false;
     for (let i = 0; i < orderedCategories.length; i++) {
@@ -606,22 +649,36 @@
     
     console.log('Final category order after all reordering:', orderedCategories.map(cat => cat.name));
     
-    // Ultimate fallback: If we still can't find "Dishes of the Day", 
-    // manually check for the exact category name you want
-    const targetCategoryName = 'Dishes of the Day (COOKED MEALS)';
-    const exactMatchIndex = orderedCategories.findIndex(group => 
-      group.name.toLowerCase() === targetCategoryName.toLowerCase()
-    );
+         // Ultimate fallback: If we still can't find "Dishes of the Day", 
+     // manually check for the exact category name you want (both languages)
+     const targetCategoryNames = [
+       'Dishes of the Day (COOKED MEALS)',  // English
+       'Πιάτα της Ημέρας (ΜΑΓΕΙΡΕΜΕΝΑ)'   // Greek
+     ];
+     
+     let exactMatchFound = false;
+     for (const targetCategoryName of targetCategoryNames) {
+       const exactMatchIndex = orderedCategories.findIndex(group => 
+         group.name.toLowerCase() === targetCategoryName.toLowerCase()
+       );
+       
+       if (exactMatchIndex > 0) {
+         console.log(`Ultimate fallback: Found exact match "${targetCategoryName}" at index ${exactMatchIndex}, moving to first`);
+         const exactMatch = orderedCategories.splice(exactMatchIndex, 1)[0];
+         orderedCategories.unshift(exactMatch);
+         console.log('After ultimate fallback:', orderedCategories.map(cat => cat.name));
+         exactMatchFound = true;
+         break;
+       }
+     }
+     
+     if (!exactMatchFound) {
+       console.log(`Ultimate fallback: Exact category names not found in available categories`);
+       console.log('Searched for:', targetCategoryNames);
+       console.log('Available categories:', orderedCategories.map(cat => cat.name));
+     }
     
-    if (exactMatchIndex > 0) {
-      console.log(`Ultimate fallback: Found exact match "${targetCategoryName}" at index ${exactMatchIndex}, moving to first`);
-      const exactMatch = orderedCategories.splice(exactMatchIndex, 1)[0];
-      orderedCategories.unshift(exactMatch);
-      console.log('After ultimate fallback:', orderedCategories.map(cat => cat.name));
-    } else if (exactMatchIndex === -1) {
-      console.log(`Ultimate fallback: Exact category name "${targetCategoryName}" not found in available categories`);
-      console.log('Available categories:', orderedCategories.map(cat => cat.name));
-    }
+    
     
 
 

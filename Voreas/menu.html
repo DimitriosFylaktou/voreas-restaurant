@@ -561,6 +561,68 @@
       console.log('After fallback reordering:', orderedCategories.map(cat => cat.name));
     }
     
+    // Final fallback: Force "Dishes of the Day" to be first regardless of name matching
+    // This ensures it always appears first even if the category name is completely different
+    console.log('Final fallback: Ensuring "Dishes of the Day" category is first');
+    
+    // Look for any category that might be the "Dishes of the Day" category
+    // We'll check multiple possible variations
+    const possibleDishesOfDayNames = [
+      'dishes of the day',
+      'cooked meals', 
+      'dish of the day',
+      'daily',
+      'special',
+      'today',
+      'of the day',
+      'daily specials',
+      'chef specials',
+      'daily menu'
+    ];
+    
+    let foundDishesOfDay = false;
+    for (let i = 0; i < orderedCategories.length; i++) {
+      const category = orderedCategories[i];
+      const lowerName = category.name.toLowerCase();
+      
+      // Check if this category matches any of our patterns
+      const isDishesOfDay = possibleDishesOfDayNames.some(pattern => 
+        lowerName.includes(pattern)
+      );
+      
+      if (isDishesOfDay && i > 0) {
+        console.log(`Final fallback: Moving "${category.name}" from position ${i} to first position`);
+        const movedCategory = orderedCategories.splice(i, 1)[0];
+        orderedCategories.unshift(movedCategory);
+        foundDishesOfDay = true;
+        break;
+      }
+    }
+    
+    if (!foundDishesOfDay) {
+      console.log('Warning: No "Dishes of the Day" category found with any known patterns');
+      console.log('Available categories:', orderedCategories.map(cat => cat.name));
+    }
+    
+    console.log('Final category order after all reordering:', orderedCategories.map(cat => cat.name));
+    
+    // Ultimate fallback: If we still can't find "Dishes of the Day", 
+    // manually check for the exact category name you want
+    const targetCategoryName = 'Dishes of the Day (COOKED MEALS)';
+    const exactMatchIndex = orderedCategories.findIndex(group => 
+      group.name.toLowerCase() === targetCategoryName.toLowerCase()
+    );
+    
+    if (exactMatchIndex > 0) {
+      console.log(`Ultimate fallback: Found exact match "${targetCategoryName}" at index ${exactMatchIndex}, moving to first`);
+      const exactMatch = orderedCategories.splice(exactMatchIndex, 1)[0];
+      orderedCategories.unshift(exactMatch);
+      console.log('After ultimate fallback:', orderedCategories.map(cat => cat.name));
+    } else if (exactMatchIndex === -1) {
+      console.log(`Ultimate fallback: Exact category name "${targetCategoryName}" not found in available categories`);
+      console.log('Available categories:', orderedCategories.map(cat => cat.name));
+    }
+    
 
 
     // Build category navigation (only for categories with items)

@@ -153,7 +153,8 @@
       drinks_soft: 'Soft Drinks',
       drinks_hot: 'Hot Beverages',
       drinks_cold: 'Cold Beverages',
-      drinks_coffee: 'Coffee'
+      drinks_coffee: 'Coffee',
+      cat_dishes_of_day: 'Dishes of the Day (COOKED MEALS)'
     },
     gr: {
       nav_home: 'Αρχική',
@@ -255,7 +256,8 @@
       drinks_soft: 'Αναψυκτικά',
       drinks_hot: 'Ζεστά Ποτά',
       drinks_cold: 'Κρύα Ποτά',
-      drinks_coffee: 'Καφές'
+      drinks_coffee: 'Καφές',
+      cat_dishes_of_day: 'Πιάτα της Ημέρας (ΜΑΓΕΙΡΕΜΕΝΑ)'
     }
   };
 
@@ -277,6 +279,20 @@
     if (window.menuData) {
       renderMenu(window.menuData);
     }
+  }
+
+  // Function to translate category names
+  function translateCategoryName(categoryName) {
+    const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+    
+    // Check if this is the "Dishes of the Day" category
+    if (categoryName.toLowerCase().includes('dishes of the day') || 
+        categoryName.toLowerCase().includes('cooked meals')) {
+      return translations[currentLang].cat_dishes_of_day;
+    }
+    
+    // Return original name if no translation found
+    return categoryName;
   }
 
   function showCategory(categoryId) {
@@ -485,7 +501,8 @@
     let navHtml = '';
     orderedCategories.forEach((group, index) => {
       const categoryId = `category-${index}`;
-      navHtml += `<button class="category-btn" data-category="${categoryId}">${group.name}</button>`;
+      const translatedName = translateCategoryName(group.name);
+      navHtml += `<button class="category-btn" data-category="${categoryId}" data-original-name="${group.name}">${translatedName}</button>`;
     });
     categoryNav.innerHTML = navHtml;
 
@@ -493,8 +510,9 @@
     let html = '';
     orderedCategories.forEach((group, index) => {
       const categoryId = `category-${index}`;
+      const translatedName = translateCategoryName(group.name);
       html += `<div id="${categoryId}" class="menu-category-section">`;
-      html += `<h2>${group.name}</h2>`;
+      html += `<h2>${translatedName}</h2>`;
       group.items.forEach(item => {
         // Use the appropriate columns based on language
         const dishName = item[dishNameColumn] || item['Dish Name'] || '';
